@@ -2,8 +2,197 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "dspsf22.classes.chrisbirdsall.com",
+    "title": "sps506.classes.chrisbirdsall.com",
     "section": "",
-    "text": "To learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n#> [1] 2"
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n# test\n1 + 1\n#&gt; [1] 2"
+  },
+  {
+    "objectID": "labs/Lab01_SPS506.html",
+    "href": "labs/Lab01_SPS506.html",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "",
+    "text": "The main goal of this lab is to continue your introduction to R and RStudio by diving a little bit deeper into its functions and extensibility using packages. In this class, specifically, you’ll be using RStudio Cloud, which is identical to the desktop version except for the super convenient fact that you can access your R projects from any computer with internet access and a web browser.\n\n\nR is the name of the programming language itself and RStudio is a convenient interface.\nAs the labs progress, you are encouraged to explore beyond what the labs dictate; a willingness to experiment will make you a much better programmer. Before we get to that stage, however, you need to build some basic fluency in R. Today we begin with the fundamental building blocks of R and RStudio: the interface, reading in data, and basic commands."
+  },
+  {
+    "objectID": "labs/Lab01_SPS506.html#open-the-starter-project-in-rstudio-cloud",
+    "href": "labs/Lab01_SPS506.html#open-the-starter-project-in-rstudio-cloud",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Open the starter project in RStudio Cloud",
+    "text": "Open the starter project in RStudio Cloud\nVisit Posit.cloud and login using the credentials you setup in our first class. Once you load up RStudio Cloud in your web browser you should see something like this (though you’ll see BSU - PPA PhD instead of SPS 502):\n\nIn the left side bar you’ll see a header, “Space”, under which you’ll see “Your Workspace” and “BSU - PPA PhD”. Click BSU - PPA PhD to view the list of projects associated with our class.\nThere you’ll see the Lab 01 starter project, called “Lab01 - R & RStudio & Dinosaurs! Oh my!”\nClick “Start” to begin the lab"
+  },
+  {
+    "objectID": "labs/Lab01_SPS506.html#opening-the-starter-file",
+    "href": "labs/Lab01_SPS506.html#opening-the-starter-file",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Opening the starter file",
+    "text": "Opening the starter file\nWhen you want to write a paper, you have to open a Word document to type your ideas into, and save your work in. In R we use a document type called an R Markdown document. R Markdown documents are useful for both running code, and annotating the code with comments. The document can be saved, so you can refer back to your code later, and can be used to create other document types (html, word, pdf, or slides) for presenting the results of your analyses. R Markdown provides a way to generate clear and reproducible statistical analyses."
+  },
+  {
+    "objectID": "labs/Lab01_SPS506.html#editing-an-r-markdown-file",
+    "href": "labs/Lab01_SPS506.html#editing-an-r-markdown-file",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Editing an R Markdown file",
+    "text": "Editing an R Markdown file\nThe top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for “YAML Ain’t Markup Language”. It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML it contains meta information about your document, such as the title of the document, the author name, and the date.\nLet’s start by adding your first and last name in author field and adding the date. Be sure to keep the quotation marks."
+  },
+  {
+    "objectID": "labs/Lab01_SPS506.html#saving-a-file",
+    "href": "labs/Lab01_SPS506.html#saving-a-file",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Saving a file",
+    "text": "Saving a file\nYou will complete your lab work in an R Markdown file like this each week, so it is important to learn how to save these files. It’s generally good practice to periodically save your work as you go.\nClick File &gt; Save\nOkay, let’s get to the fun part!"
+  },
+  {
+    "objectID": "labs/Lab01_SPS506.html#loading-packages",
+    "href": "labs/Lab01_SPS506.html#loading-packages",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Loading Packages",
+    "text": "Loading Packages\nIn this lab we will use the tidyverse and datasauRus packages. We can load them using the following (this code is already provided for you in your starter document):\n\nlibrary(tidyverse)\n\nlibrary(datasauRus)"
+  },
+  {
+    "objectID": "labs/Lab01_SPS506.html#data",
+    "href": "labs/Lab01_SPS506.html#data",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Data",
+    "text": "Data\nThe data frame we will be working with today is called datasaurus_dozen and it’s in the datasauRus package. Actually, this single data frame contains 13 datasets, designed to show us why data visualization is important and how summary statistics alone can be misleading. The different datasets are marked by the dataset variable.\n\nExercise 1\nTo find out more about the dataset, type the following in your Console: ?datasaurus_dozen. A question mark before the name of an object will always bring up its help file. This command must be run in the Console.\nBased on the help file, how many rows and how many columns does the datasaurus_dozen file have? What are the variables included in the data frame? Add your responses to your lab report.\nLet’s take a closer look at these datasets by making a frequency table of the dataset variable. Add the following code block to your R Markdown document and run it (copy the code then paste it into a code block under your answer in exercise 1):\n\ndatasaurus_dozen %&gt;%\ncount(dataset) %&gt;%\nprint(13)\n\nTo add a codeblock click the green “C+” button (as shown below) and click r:\n\nYou should see a “tibble” pop up listing the names of the datasets in one column and the number of observations (n) in the next column."
+  },
+  {
+    "objectID": "labs/Lab01_SPS506.html#data-visualization-and-summary",
+    "href": "labs/Lab01_SPS506.html#data-visualization-and-summary",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Data Visualization and Summary",
+    "text": "Data Visualization and Summary\nOkay, we’re about to do a lot of stuff that won’t make a ton of sense yet. We’ll go through a brief explanation in this lab, but more details and context for these commands will come in the next couple of weeks. For now, buckle up!\n\nExercise 2\nPlot y vs. x for the dino dataset. Then, calculate the correlation coefficient between x and y for this dataset. (Er… excuse me?)\nDon’t worry. All the code you need to accomplish this is already in your lab for you. You’ll just need to include the code and some other information in your R Markdown file.\nStart with the datasaurus_dozen and pipe it into the filter function to filter for observations where dataset == \"dino\". Store the resulting filtered data frame as a new data frame called dino_data.\n\ndino_data &lt;- datasaurus_dozen %&gt;%\n\nfilter(dataset == \"dino\")\n\nThere is a lot going on here, so let’s go through each part:\nFirst, the pipe operator: %&gt;%, takes what comes before it and sends it as the first argument to what comes after it. So here, we’re saying filter the datasaurus_dozen data frame for observations where dataset == \"dino\".\nSecond, the assignment operator: &lt;-, assigns the name dino_data to the filtered data frame and stores it as an object in your environment (take a look at the environment pane in the top left corner).\nNext, we need to visualize these data (yes, plural). We will use the ggplot function for this. The first argument specifies the data you’re visualizing. Next we define the aesthetic mappings (more on this next week). In other words, the columns of the data that get mapped to certain aesthetic features of the plot, e.g. the x axis will represent the variable called x and the y axis will represent the variable called y. Then, we add another layer to this plot where we define which geometric shapes we want to use to represent each observation in the data. In this case we want these to be points, hence geom_point.\n\nggplot(data = dino_data, mapping = aes(x = x, y = y)) +\n\ngeom_point()\n\nIf this seems like a lot, it is. And you will learn about the philosophy of building data visualizations in detail next week. For now, just stick with it and follow along with the code . Again, I do not expect this to make much sense yet.\nFor the second part of this exercise, we need to calculate a summary statistic: the correlation coefficient. Correlation coefficients, often referred to as \\(r\\) in statistics, measure the linear association between two variables. You will see that some of the pairs of variables we plot do not have a linear relationship between them. This is exactly why we want to visualize first: visualize to assess the form of the relationship, and calculate \\(r\\) only if relevant. In this case, calculating a correlation coefficient really doesn’t make sense since the relationship between x and y is definitely not linear…. it’s shaped like a dinosaur!\nBut, for illustrative purposes, let’s calculate the correlation coefficient between x and y anyway.\n\n\nStart with dino_data and calculate a summary statistic that we will call r as the correlation between x and y.\n\ndino_data %&gt;%\n  summarize(r = cor(x, y))\n\n\n\nExercise 3\nPlot y vs. x for the star dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between x and y for this dataset. How does this value compare to the r of dino?\n\n\nExercise 4\nPlot y vs. x for the circle dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between x and y for this dataset. How does this value compare to the r of dino?\n\n\nExercise 5\nFinally, let’s plot all datasets at once. In order to do this we will make use of facetting.\n\nggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+\n  geom_point()+\n  facet_wrap(~ dataset, ncol = 3) +\n  theme(legend.position = \"none\")\n\n\n\nFacet by the dataset variable, placing the plots in a 3 column grid, and don’t add a legend.\nAnd we can use the group_by function to generate all the summary correlation coefficients.\n\ndatasaurus_dozen %&gt;%\n  group_by(dataset) %&gt;%\n  summarize(r = cor(x, y)) %&gt;%\n  print(13)"
+  },
+  {
+    "objectID": "labs/Lab01_SPS506.html#kniting-an-html-file",
+    "href": "labs/Lab01_SPS506.html#kniting-an-html-file",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "kniting an HTML file",
+    "text": "kniting an HTML file\nClick the “knit” button at the top left side of the screen to knit the file, or in other words, produce an output document. An .html file will be generated.\nNote: If you see the popup below you can hit try again (which should work) or just hit cancel and file will still be there for you to open in the files pane:\n\nThen click on the html file in the “Files” pane to open it in your web browser:"
+  },
+  {
+    "objectID": "labs/Lab01_SPS506.html#finishing-touches",
+    "href": "labs/Lab01_SPS506.html#finishing-touches",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Finishing touches",
+    "text": "Finishing touches\nAlmost done, but I’d like you to do two more things:\n\nResize your figures:\n\nClick on the gear icon in on top of the R Markdown document, and select “Output Options…” in the dropdown menu. In the pop up dialogue box go to the Figures tab and change the height and width of the figures, and hit OK when done. Then, knit your document and see how you like the new sizes. Change and knit again and again until you’re happy with the figure sizes. Note that these values get saved in the YAML.\n\nYou can also use different figure sizes for different figures. To do so click on the gear icon within the chunk where you want to make a change. Changing the figure sizes added new options to these chunks: fig.width and fig.height (click the checkbox next to “Use custom figure size” first. You can change them by defining different values directly in your R Markdown document as well.\n\n\nChange the look of your report:\n\nOnce again click on the gear icon in on top of the R Markdown document, and select “Output Options…” in the dropdown menu. In the General tab of the pop up dialogue box try out different Syntax highlighting and theme options. Hit OK and knit your document to see how it looks. Play around with these until you’re happy with the look."
+  },
+  {
+    "objectID": "labs/Lab01_SPS506.html#submission",
+    "href": "labs/Lab01_SPS506.html#submission",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Submission",
+    "text": "Submission\nFinally, you need to save your html file and submit it to me on Canvas. Here’s how to do it (see image below for reference):\n\n\nFirst, click the checkbox next to the html file in your files pane.\nNext, click “More” and select “Export”\nSave the html file somewhere on your computer where you can find it (e.g., downloads folder, documents folder, desktop, or a folder you created for the class).\nGo to our class page on canvas and click on “assignments”. Navigate to “Lab 01” under “Labs” and submit just as you would a paper in any other class.\n\nAnd you’re done!"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "labs/lab04-key.html",
+    "href": "labs/lab04-key.html",
+    "title": "Lab 04 - Tidy Data - Key",
+    "section": "",
+    "text": "The goal of this lab is to practice importing, tidying, then visualizing and analyzing data."
+  },
+  {
+    "objectID": "labs/lab04-key.html#load-packages",
+    "href": "labs/lab04-key.html#load-packages",
+    "title": "Lab 04 - Tidy Data - Key",
+    "section": "Load packages",
+    "text": "Load packages\n\nlibrary(tidyverse)\nlibrary(googlesheets4)"
+  },
+  {
+    "objectID": "labs/lab04-key.html#import-data",
+    "href": "labs/lab04-key.html#import-data",
+    "title": "Lab 04 - Tidy Data - Key",
+    "section": "Import Data",
+    "text": "Import Data\nWe’re going to import our data from a google sheet:\n\ngapminder_wide &lt;- read_sheet(\"https://docs.google.com/spreadsheets/d/1E8u2GL0aCmWiU2AnpNirfUPxWSJBN50Tyrf5ilapwSw/edit?usp=sharing\")\n\n\nAuthorize tidyverse to use your google account\nType 1 for yes: \n Copy the authorization code:\n\nPaste it into the console:"
+  },
+  {
+    "objectID": "labs/lab04-key.html#exercise-1",
+    "href": "labs/lab04-key.html#exercise-1",
+    "title": "Lab 04 - Tidy Data - Key",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nHow many observations and how many variables are in the dataset? What does each row represent? Is the dataset tidy? Enter the code you need to get this information and answer the questions.\n\nglimpse(gapminder_wide)"
+  },
+  {
+    "objectID": "labs/lab04-key.html#exercise-2",
+    "href": "labs/lab04-key.html#exercise-2",
+    "title": "Lab 04 - Tidy Data - Key",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nSpoiler: It ain’t tidy! Tidying data can be really tricky in some cases so we’re going to go through this together.\nLet’s look at the data again, but this time we’re going to use the tbl_vars() function from the dyplyr package to just give us a list of all the variables in the dataset.\n\ngapminder_wide %&gt;% \n  tbl_vars()\n\nSo, we see from the output above that each variable has a year at the end of its name (e.g., pop_1952). If we’re interested in analyzing these data, we know we don’t want to have multiple columns for each variable (e.g., a life expectancy column for each year). We want ONE life expectancy variable (column) with values recorded for each year for each country in the dataset. So, let’s use the pivot_longer() function from the dplyr package to make our data tidy:\n\ngapminder_tidy &lt;- gapminder_wide %&gt;% \n  pivot_longer(names_to = c(\".value\", \"year\"),\n               names_sep = \"_\",\n               names_transform = list(year = as.integer),\n              cols = c(-continent, -country))\n\nThis code looks a little bit different than the pivot_longer code we went over in the lecture. For more information about all of these arguments visit the the pivot longer webpage for the tidyrpackage.\n\ngapminder_tidy %&gt;% \n  tbl_vars()"
+  },
+  {
+    "objectID": "labs/lab04-key.html#exercise-3",
+    "href": "labs/lab04-key.html#exercise-3",
+    "title": "Lab 04 - Tidy Data - Key",
+    "section": "Exercise 3",
+    "text": "Exercise 3\nFirst, let’s get a sense of our new tidy dataset using the glimpse command:\n\nglimpse(gapminder_tidy)\n\nAnswer the following:\n\nHow many observations are there? 1,704\nHow many variables? 6\nWhat is the unit of analysis (what does each row represent)? How does this differ from the unit of analysis in the untidy(wide) data you started with?\n\nCountry-year. The unit of analysis in the untidy dataset was country.\nNext, let’s calculate some basic descriptive statistics to get a sense of our variables."
+  },
+  {
+    "objectID": "labs/lab04-key.html#exercise-4",
+    "href": "labs/lab04-key.html#exercise-4",
+    "title": "Lab 04 - Tidy Data - Key",
+    "section": "Exercise 4",
+    "text": "Exercise 4\nWhat is the average population in the tidy dataset?\n\ngapminder_tidy %&gt;% \nsummarize(avg_pop = mean(pop, na.rm=TRUE))"
+  },
+  {
+    "objectID": "labs/lab04-key.html#exercise-5",
+    "href": "labs/lab04-key.html#exercise-5",
+    "title": "Lab 04 - Tidy Data - Key",
+    "section": "Exercise 5",
+    "text": "Exercise 5\nAverage population for so many countries over many years isn’t super useful to us. How can we come up with a more meaningful average population statistic? Let’s break the data down a bit to find something more interesting. Write and run code to calculate the average population for each year in the dataset.\n\ngapminder_tidy %&gt;% \n  group_by(year) %&gt;% \nsummarize(avg_pop_year = mean(pop, na.rm=TRUE))\n\nOkay, slightly more useful. A lot more people in 2007 than in 1952!"
+  },
+  {
+    "objectID": "labs/lab04-key.html#exercise-6",
+    "href": "labs/lab04-key.html#exercise-6",
+    "title": "Lab 04 - Tidy Data - Key",
+    "section": "Exercise 6",
+    "text": "Exercise 6\nLet’s create a visualization of population over time. One thing we could try is visualizing population over time for each continent. Think about which kind of graph would be best for communicating this then write and run the code (HINT: You’re going to need to add group = continent to your aes() arguments to make the graph legible:\n\ngapminder_tidy %&gt;% \n  group_by(year, continent) %&gt;% \n  summarize(avg_pop = mean(pop)) %&gt;% \nggplot(aes(x=year, y=avg_pop, color=continent)) +\n  geom_line()"
+  },
+  {
+    "objectID": "labs/Lab05.html",
+    "href": "labs/Lab05.html",
+    "title": "Lab 05 - Data Visualization II",
+    "section": "",
+    "text": "library(dplyr)\nlibrary(ggplot2)\nlibrary(readr)\n\n\n\nToday we will practice data visualization using data on births from the state of North Carolina. Copy, paste and run the code below to load the data.\n\nnc &lt;- read_csv(\"https://docs.google.com/spreadsheets/d/e/2PACX-1vTm2WZwNBoQdZhMgot7urbtu8eG7tzAq-60ZJsQ_nupykCAcW0OXebVpHksPWyR4x8xJTVQ8KAulAFS/pub?gid=202410847&single=true&output=csv\")\n\nThe data set that shows up in your Environment is a large data frame. Each observation or case is a birth of a single child. We also call this our “unit of analysis”."
+  },
+  {
+    "objectID": "labs/Lab05.html#load-the-packages",
+    "href": "labs/Lab05.html#load-the-packages",
+    "title": "Lab 05 - Data Visualization II",
+    "section": "",
+    "text": "library(dplyr)\nlibrary(ggplot2)\nlibrary(readr)\n\n\n\nToday we will practice data visualization using data on births from the state of North Carolina. Copy, paste and run the code below to load the data.\n\nnc &lt;- read_csv(\"https://docs.google.com/spreadsheets/d/e/2PACX-1vTm2WZwNBoQdZhMgot7urbtu8eG7tzAq-60ZJsQ_nupykCAcW0OXebVpHksPWyR4x8xJTVQ8KAulAFS/pub?gid=202410847&single=true&output=csv\")\n\nThe data set that shows up in your Environment is a large data frame. Each observation or case is a birth of a single child. We also call this our “unit of analysis”."
+  },
+  {
+    "objectID": "labs/Lab05.html#scatterplots",
+    "href": "labs/Lab05.html#scatterplots",
+    "title": "Lab 05 - Data Visualization II",
+    "section": "Scatterplots",
+    "text": "Scatterplots\nScatterplots allow you to investigate the relationship between two numerical variables. While you may already be familiar with this type of plot, let’s view it through the lens of the Grammar of Graphics. Specifically, we will graphically investigate the relationship between the following two numerical variables in the flights data frame:\n\nweeks: length of a pregnancy on the horizontal “x” axis and\nweight: birth weight of a baby in pounds on the vertical “y” axis\n\n\nggplot(data = nc, aes(x = weeks, y = weight)) + \n  geom_point()\n\n\n\n\n\n\n\n\nLet’s view this plot through the grammar of graphics. Within the ggplot() function call, we specified:\n\nThe data frame to be nc by setting data = nc\nThe aesthetic mapping by setting aes(x = weeks, y = weight)\nThe variable weeks maps to the x-position aesthetic\nThe variable weight maps to the y-position aesthetic.\n\nWe also add a layer to the ggplot() function call using the + sign. The layer in question specifies the geometric object here as points, by specifying geom_point().\n\nFinally, we can also add axis labels and a title to the plot like so. Again we add a new layer, this time a labs or labels layer.\n\nggplot(data = nc, aes(x = weeks, y = weight)) + \n  geom_point() + \n  labs(x = \"Length of pregnancy (in weeks)\", y = \"Birth weight of baby (lbs)\", \n       title = \"Relationship between pregnancy duration and newborn weight\")\n\n\nExercise 2\nIs there a positive or negative relationship between these variables? (text only to answer)\n\n\nExercise 3\nMake a graph showing weeks again on the x axis and the variable gained on the y axis (the amount of weight a mother gained during pregnancy). Include axis labels with measurement units, and a title. (code only to answer)\n\n\nExercise 4\nStudy the code below, and the resulting graphical output. Note a new argument of color = premie inside the aesthetic mapping. The variable premie indicates whether a birth was early (premie) or went full term. Please answer with text:\n **A.** What did adding the argument `color = premie` accomplish? \n \n **B.** How many **variables** are now displayed on this plot?  \n \n **C.** What appears to (roughly) be the pregnancy length cutoff for classifying a newborn as a \"premie\"\" versus a \"full term\". \n\nggplot(data = nc, aes(x = weeks, y = gained, color = premie))+ \n  geom_point() + \n  labs(x = \"Pregnancy length (wks)\", y = \"Maternal weight gain (lbs)\")\n\n\n\n\n\n\n\n\n\n\nExercise 5\nMake a new scatterplot that shows a mothers age on the x axis (variable called mage) and birth weight of newborns on the y axis (weight). Color the points on the plot based on the gender of the resulting baby (variable called gender). Does there appear to be any strong relationship between a mother’s age and the weight of her newborn? (code and text to answer)"
+  },
+  {
+    "objectID": "labs/Lab05.html#histograms",
+    "href": "labs/Lab05.html#histograms",
+    "title": "Lab 05 - Data Visualization II",
+    "section": "Histograms",
+    "text": "Histograms\nHistograms are useful plots for showing how many elements of a single numerical variable fall in specified bins. This is a very useful way to get a sense of the distribution of your data. Histograms are often one of the first steps in exploring data visually.\nFor instance, to look at the distribution of pregnancy duration (variable called weeks), copy, paste and run the following in a new code chunk:\n\nggplot(data = nc, aes(x = weeks))+ \n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nA few things to note here:\n\nThere is only one variable being mapped in aes(): the single numerical variable weeks. You don’t need to compute the y-aesthetic: R calculates it automatically.\nWe set the geometric object as geom_histogram()\nThe warning message encourages us to specify the number of bins on the histogram, as R chose 30 for us.\n\nWe can change the binwidth (and thus the number of bins), as well as the colors like so.\n\nggplot(data = nc, aes(x = weeks))+ \n  geom_histogram(binwidth = 1, color = \"white\", fill = \"steelblue\")\n\n\n\n\n\n\n\n\nNote that none of these arguments went inside the aesthetic mapping argument as they do not specifically represent mappings of variables.\n\nExercise 6\nInspect the histogram of the weeks variable. Answer each of the following with text.\n**A.** The y axis is labeled **count**. What is specifically being counted in this case? Hint: think about what each case is in this data set. \n\n**B.** What appears to be roughly the average length of pregnancies in weeks?\n\n**C.** If we changed the binwidth to 100, how many bins would there be? Roughly how many cases would be in each bin?\n\n\nExercise 7\nMake a histogram of the birth weight of newborns (which is in lbs), including a title and axis labels. (code only to answer)"
+  },
+  {
+    "objectID": "labs/Lab05.html#faceting",
+    "href": "labs/Lab05.html#faceting",
+    "title": "Lab 05 - Data Visualization II",
+    "section": "Faceting",
+    "text": "Faceting\nFaceting is used when we’d like to create small multiples of the same plot over a different categorical variable. By default, all of the small multiples will have the same vertical axis.\nFor example, suppose we were interested in looking at whether pregnancy length varied by the maturity status of a mother (column name mature). This is what is meant by “the distribution of one variable over another variable”: weeks is one variable and mature is the other variable. In order to look at histograms of weeks for older and more mature mothers, we add a plot layer facet_wrap(~ mature, ncol = 1). The ncol = 1 argument just tells R to stack the two histograms into one column.\n\nggplot(data = nc, aes(x = weeks)) +\n  geom_histogram(binwidth = 1, color = \"white\", fill = \"steelblue\") +\n  facet_wrap(~ mature, ncol = 1)\n\n\n\n\n\n\n\n\n\nExercise 8\nMake a histogram of newborn birth weight split by gender of the child. Set the binwidth to 0.5. Which gender appears to have a slightly larger average birth weight? (code and text to answer)"
+  },
+  {
+    "objectID": "labs/Lab05.html#boxplots",
+    "href": "labs/Lab05.html#boxplots",
+    "title": "Lab 05 - Data Visualization II",
+    "section": "Boxplots",
+    "text": "Boxplots\nWhile histograms can help to show the distribution of data, boxplots have much more flexibility, and can provide even more information in a single graph. The y aesthetic is the numeric variable you want to include in the boxplot, and the x aesthetic is a grouping variable. For instance, below we set gender as the aesthetic mapping for x, and gained as the aesthetic mapping for y. This creates a boxplot of the weight gained for mothers that had male and female newborns. Note that the fill argument is not necessary, but sets a color for the boxplots.\n\nggplot(data = nc, aes(x = gender, y = gained)) +\n  geom_boxplot(fill = \"sienna\")\n\n\n\n\n\n\n\n\n\nFor review, these are the different parts of the boxplot: ’\n\nThe bottom of the “box” portion represents the 25th percentile (1st quartile)\nThe horizontal line in the “box” shows the median (50th percentile, 2nd quartile)\nThe top of the “box” represents the 75th percentile (3rd quartile)\nThe height of each “box”, i.e. the value of the 3rd quartile minus the value of the 1st quartile, is called the interquartile range (IQR). It is a measure of spread of the middle 50% of values. Longer boxes indicating more variability.\nThe “whiskers” extending out from the bottoms and tops of the boxes represent points less than the 25th percentile and greater than the 75th percentiles respectively. They extend out no more than 1.5 x IQR units away from either end of the boxes. The length of these whiskers show how the data outside the middle 50% of values vary. Longer whiskers indicate more variability.\nThe dots represent values falling outside the whiskers or outliers. The definition of an outlier is somewhat arbitrary and not absolute. In this case, they are defined by the length of the whiskers, which are no more than 1.5 x IQR units long.\n\n\n\nExercise 9\nMake a boxplot of the weight gained by moms, split by the maturity status of the mothers (mature). Include axis labels and a title on your plot. Is the median weight gain during pregnancy larger for younger or older moms? (text and code)\n\n\nExercise 10\nMake a boxplot of pregnancy duration in weeks by smoking habit. Is the duration of pregnancy more variable for smokers or non-smokers? (i.e. which group has the greater spread for the variable weeks?). (code and text to answer)"
   }
 ]

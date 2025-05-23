@@ -1,0 +1,122 @@
+---
+title: "Lab 04 - Tidy Data"
+sidebar: false
+toc: true
+editor: source
+execute: 
+  enabled: false
+---
+
+# Introduction
+
+The goal of this lab is to practice importing, tidying, then visualizing and analyzing data.
+
+# Setup
+
+## Load packages
+
+```{r}
+library(tidyverse)
+```
+
+## Import Data
+
+
+```{r}
+gapminder_wide <- read_csv("data/gapminder_wide.csv")
+```
+# Tidy Data Walkthrough
+
+## Exercise 1
+
+How many observations and how many variables are in the dataset? What does each row represent? Is the dataset tidy? Enter the code you need to get this information and answer the questions.
+
+```{r}
+glimpse(gapminder_wide)
+```
+
+## Exercise 2
+
+Spoiler: It ain't tidy! Tidying data can be really tricky in some cases so we're going to go through this together.
+
+Let's look at the data again, but this time we're going to use the `tbl_vars()` function from the `dyplyr` package to just give us a list of all the variables in the dataset.
+
+```{r}
+gapminder_wide %>% 
+  tbl_vars()
+```
+
+So, we see from the output above that each variable has a year at the end of its name (e.g., pop_1952). If we're interested in analyzing these data, we know we don't want to have multiple columns for each variable (e.g., a life expectancy column for each year). We want ONE life expectancy variable (column) with values recorded for each year for each country in the dataset. So, let's use the `pivot_longer()` function from the `dplyr` package to make our data tidy:
+
+```{r}
+gapminder_tidy <- gapminder_wide %>% 
+  pivot_longer(names_to = c(".value", "year"),
+               names_sep = "_",
+               names_transform = list(year = as.integer),
+              cols = c(-continent, -country))
+```
+
+This code looks a *little bit* different than the `pivot_longer` code we went over in the lecture. For more information about all of these arguments visit the [the pivot longer webpage for the `tidyr`package](https://tidyr.tidyverse.org/reference/pivot_longer.html).
+
+```{r}
+gapminder_tidy %>% 
+  tbl_vars()
+```
+
+# Visualization and Descriptives
+
+Okay, our data are tidy. Now let's do some analyzing.
+
+## Exercise 3
+
+First, let's get a sense of our new tidy dataset. Use the `glimpse` command to analyze the `gapminder_tidy` dataframe and answer the following questions:
+
+-   How many observations are there?
+
+-   How many variables?
+
+-   What is the unit of analysis (what does each row represent)? How does this differ from the unit of analysis in the untidy(wide) data you started with?
+
+## Exercise 4
+
+Next, let's calculate some basic descriptive statistics to get a sense of our variables. Using code you learned in last week's lab, answer the following: What is the average population in the tidy dataset?
+
+## Exercise 5
+
+Average population for so many countries over many years isn't super useful to us. How can we come up with a more meaningful average population statistic? Let's break the data down a bit to find something more interesting. Write and run code to calculate the average population **for each year** in the dataset.
+
+```{r}
+
+```
+
+Okay, slightly more useful. A lot more people in 2007 than in 1952!
+
+## Exercise 6
+
+Let's create a visualization of population over time. One thing we could try is visualizing population over time for each continent. Think about which kind of graph would be best for communicating this. 
+
+This is a tough one, so here are a couple of hints: before your ggplot command you'll want to group by year and continent THEN ( %>% ) create the average population variable with the summarize command THEN enter your ggplot code. You'll also want to add a color=continent argument in your aes(). 
+
+```{r}
+
+```
+
+# Exercise 7
+
+Okay, let's explore a couple of relationships in the data. We have data for gdp per capita, population, and life expectancy. Make scatterplots showing the relationship between 1) `pop` and `gdpPercap` and 2) `gdpPercap` and `lifeExp`.
+
+```{r}
+
+```
+
+What do you observe about the relationship between these variables?
+
+# Exercise 8 (on your own at home!)
+
+Think of another visualization independently on your own, write the code, run it, and describe what you've done!
+
+# Submission
+
+Finally, save your html file and submit it to me on Canvas.
+
+**And you're done!**

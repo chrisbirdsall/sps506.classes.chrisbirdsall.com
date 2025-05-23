@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "dspsf22.classes.chrisbirdsall.com"
+  title: "sps506.classes.chrisbirdsall.com"
   navbar:
     left:
       - href: index.qmd
