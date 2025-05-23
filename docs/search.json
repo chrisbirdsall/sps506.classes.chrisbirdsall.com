@@ -194,5 +194,82 @@
     "title": "Lab 05 - Data Visualization II",
     "section": "Boxplots",
     "text": "Boxplots\nWhile histograms can help to show the distribution of data, boxplots have much more flexibility, and can provide even more information in a single graph. The y aesthetic is the numeric variable you want to include in the boxplot, and the x aesthetic is a grouping variable. For instance, below we set gender as the aesthetic mapping for x, and gained as the aesthetic mapping for y. This creates a boxplot of the weight gained for mothers that had male and female newborns. Note that the fill argument is not necessary, but sets a color for the boxplots.\n\nggplot(data = nc, aes(x = gender, y = gained)) +\n  geom_boxplot(fill = \"sienna\")\n\n\n\n\n\n\n\n\n\nFor review, these are the different parts of the boxplot: ’\n\nThe bottom of the “box” portion represents the 25th percentile (1st quartile)\nThe horizontal line in the “box” shows the median (50th percentile, 2nd quartile)\nThe top of the “box” represents the 75th percentile (3rd quartile)\nThe height of each “box”, i.e. the value of the 3rd quartile minus the value of the 1st quartile, is called the interquartile range (IQR). It is a measure of spread of the middle 50% of values. Longer boxes indicating more variability.\nThe “whiskers” extending out from the bottoms and tops of the boxes represent points less than the 25th percentile and greater than the 75th percentiles respectively. They extend out no more than 1.5 x IQR units away from either end of the boxes. The length of these whiskers show how the data outside the middle 50% of values vary. Longer whiskers indicate more variability.\nThe dots represent values falling outside the whiskers or outliers. The definition of an outlier is somewhat arbitrary and not absolute. In this case, they are defined by the length of the whiskers, which are no more than 1.5 x IQR units long.\n\n\n\nExercise 9\nMake a boxplot of the weight gained by moms, split by the maturity status of the mothers (mature). Include axis labels and a title on your plot. Is the median weight gain during pregnancy larger for younger or older moms? (text and code)\n\n\nExercise 10\nMake a boxplot of pregnancy duration in weeks by smoking habit. Is the duration of pregnancy more variable for smokers or non-smokers? (i.e. which group has the greater spread for the variable weeks?). (code and text to answer)"
+  },
+  {
+    "objectID": "labs/Lab01.html",
+    "href": "labs/Lab01.html",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "",
+    "text": "The main goal of this lab is to continue your introduction to R and RStudio by diving a little bit deeper into its functions and extensibility using packages. In this class, specifically, you’ll be using RStudio Cloud, which is identical to the desktop version except for the super convenient fact that you can access your R projects from any computer with internet access and a web browser.\n\n\nR is the name of the programming language itself and RStudio is a convenient interface.\nAs the labs progress, you are encouraged to explore beyond what the labs dictate; a willingness to experiment will make you a much better programmer. Before we get to that stage, however, you need to build some basic fluency in R. Today we begin with the fundamental building blocks of R and RStudio: the interface, reading in data, and basic commands."
+  },
+  {
+    "objectID": "labs/Lab01.html#open-the-starter-project-in-rstudio-cloud",
+    "href": "labs/Lab01.html#open-the-starter-project-in-rstudio-cloud",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Open the starter project in RStudio Cloud",
+    "text": "Open the starter project in RStudio Cloud\nVisit Posit.cloud and login using the credentials you setup in the week 1 module. Once you load up Posit Cloud in your web browser you should see something like this (note the screenshots will have SPS 502 rather than BSU - PPA PhD):\n\nIn the left side bar you’ll see a header, “Space”, under which you’ll see “Your Workspace” and “BSU - PPA PhD”. Click BSU - PPA PhD to view the list of projects associated with our class.\nThere you’ll see the Lab 01 starter project, called “Lab 01 - Hello R!”.\nClick “Start” to begin the lab"
+  },
+  {
+    "objectID": "labs/Lab01.html#opening-the-starter-file",
+    "href": "labs/Lab01.html#opening-the-starter-file",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Opening the starter file",
+    "text": "Opening the starter file\nWhen you want to write a paper, you have to open a Word document to type your ideas into, and save your work in. In R we use a document type called an R Markdown document. R Markdown documents are useful for both running code, and annotating the code with comments. The document can be saved, so you can refer back to your code later, and can be used to create other document types (html, word, pdf, or slides) for presenting the results of your analyses. R Markdown provides a way to generate clear and reproducible statistical analyses."
+  },
+  {
+    "objectID": "labs/Lab01.html#editing-an-r-markdown-file",
+    "href": "labs/Lab01.html#editing-an-r-markdown-file",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Editing an R Markdown file",
+    "text": "Editing an R Markdown file\nThe top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for “YAML Ain’t Markup Language”. It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML it contains meta information about your document, such as the title of the document, the author name, and the date.\nLet’s start by adding your first and last name in author field and adding the date. Be sure to keep the quotation marks."
+  },
+  {
+    "objectID": "labs/Lab01.html#saving-a-file",
+    "href": "labs/Lab01.html#saving-a-file",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Saving a file",
+    "text": "Saving a file\nYou will complete your lab work in an R Markdown file like this each week, so it is important to learn how to save these files. It’s generally good practice to periodically save your work as you go.\nClick File &gt; Save\nOkay, let’s get to the fun part!"
+  },
+  {
+    "objectID": "labs/Lab01.html#loading-packages",
+    "href": "labs/Lab01.html#loading-packages",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Loading Packages",
+    "text": "Loading Packages\nIn this lab we will use the tidyverse and datasauRus packages. We can load them using the following (this code is already provided for you in your starter document):\n\nlibrary(tidyverse)\n\nlibrary(datasauRus)"
+  },
+  {
+    "objectID": "labs/Lab01.html#data",
+    "href": "labs/Lab01.html#data",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Data",
+    "text": "Data\nThe data frame we will be working with today is called datasaurus_dozen and it’s in the datasauRus package. Actually, this single data frame contains 13 datasets, designed to show us why data visualization is important and how summary statistics alone can be misleading. The different datasets are marked by the dataset variable.\n\nExercise 1\nTo find out more about the dataset, type the following in your Console: ?datasaurus_dozen. A question mark before the name of an object will always bring up its help file. This command must be run in the Console.\nBased on the help file, how many rows and how many columns does the datasaurus_dozen file have? What are the variables included in the data frame? Add your responses to your lab report.\nLet’s take a closer look at these datasets by making a frequency table of the dataset variable. Add the following code block to your R Markdown document and run it (copy the code then paste it into a code block under your answer in exercise 1):\n\ndatasaurus_dozen %&gt;%\ncount(dataset) %&gt;%\nprint(13)\n\nTo add a codeblock click the green “C+” button (as shown below) and click r:\n\nYou should see a “tibble” pop up listing the names of the datasets in one column and the number of observations (n) in the next column."
+  },
+  {
+    "objectID": "labs/Lab01.html#data-visualization-and-summary",
+    "href": "labs/Lab01.html#data-visualization-and-summary",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Data Visualization and Summary",
+    "text": "Data Visualization and Summary\nOkay, we’re about to do a lot of stuff that won’t make a ton of sense yet. We’ll go through a brief explanation in this lab, but more details and context for these commands will come in the next couple of weeks. For now, buckle up!\n\nExercise 2\nPlot y vs. x for the dino dataset. Then, calculate the correlation coefficient between x and y for this dataset. (Er… excuse me?)\nDon’t worry. All the code you need to accomplish this is already in your lab for you. You’ll just need to include the code and some other information in your R Markdown file.\nStart with the datasaurus_dozen and pipe it into the filter function to filter for observations where dataset == \"dino\". Store the resulting filtered data frame as a new data frame called dino_data.\n\ndino_data &lt;- datasaurus_dozen %&gt;%\n\nfilter(dataset == \"dino\")\n\nThere is a lot going on here, so let’s go through each part:\nFirst, the pipe operator: %&gt;%, takes what comes before it and sends it as the first argument to what comes after it. So here, we’re saying filter the datasaurus_dozen data frame for observations where dataset == \"dino\".\nSecond, the assignment operator: &lt;-, assigns the name dino_data to the filtered data frame and stores it as an object in your environment (take a look at the environment pane in the top left corner).\nNext, we need to visualize these data (yes, plural). We will use the ggplot function for this. The first argument specifies the data you’re visualizing. Next we define the aesthetic mappings (more on this next week). In other words, the columns of the data that get mapped to certain aesthetic features of the plot, e.g. the x axis will represent the variable called x and the y axis will represent the variable called y. Then, we add another layer to this plot where we define which geometric shapes we want to use to represent each observation in the data. In this case we want these to be points, hence geom_point.\n\nggplot(data = dino_data, mapping = aes(x = x, y = y)) +\n\ngeom_point()\n\nIf this seems like a lot, it is. And you will learn about the philosophy of building data visualizations in detail next week. For now, just stick with it and follow along with the code . Again, I do not expect this to make much sense yet.\nFor the second part of this exercise, we need to calculate a summary statistic: the correlation coefficient. Correlation coefficients, often referred to as \\(r\\) in statistics, measure the linear association between two variables. You will see that some of the pairs of variables we plot do not have a linear relationship between them. This is exactly why we want to visualize first: visualize to assess the form of the relationship, and calculate \\(r\\) only if relevant. In this case, calculating a correlation coefficient really doesn’t make sense since the relationship between x and y is definitely not linear…. it’s shaped like a dinosaur!\nBut, for illustrative purposes, let’s calculate the correlation coefficient between x and y anyway.\n\n\nStart with dino_data and calculate a summary statistic that we will call r as the correlation between x and y.\n\ndino_data %&gt;%\n  summarize(r = cor(x, y))\n\n\n\nExercise 3\nPlot y vs. x for the star dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between x and y for this dataset. How does this value compare to the r of dino?\n\n\nExercise 4\nPlot y vs. x for the circle dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between x and y for this dataset. How does this value compare to the r of dino?\n\n\nExercise 5\nFinally, let’s plot all datasets at once. In order to do this we will make use of facetting.\n\nggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+\n  geom_point()+\n  facet_wrap(~ dataset, ncol = 3) +\n  theme(legend.position = \"none\")\n\n\n\nFacet by the dataset variable, placing the plots in a 3 column grid, and don’t add a legend.\nAnd we can use the group_by function to generate all the summary correlation coefficients.\n\ndatasaurus_dozen %&gt;%\n  group_by(dataset) %&gt;%\n  summarize(r = cor(x, y)) %&gt;%\n  print(13)"
+  },
+  {
+    "objectID": "labs/Lab01.html#kniting-an-html-file",
+    "href": "labs/Lab01.html#kniting-an-html-file",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "kniting an HTML file",
+    "text": "kniting an HTML file\nClick the “knit” button at the top left side of the screen to knit the file, or in other words, produce an output document. An .html file will be generated.\nNote: If you see the popup below you can hit try again (which should work) or just hit cancel and file will still be there for you to open in the files pane:\n\nThen click on the html file in the “Files” pane to open it in your web browser:"
+  },
+  {
+    "objectID": "labs/Lab01.html#finishing-touches",
+    "href": "labs/Lab01.html#finishing-touches",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Finishing touches",
+    "text": "Finishing touches\nAlmost done, but I’d like you to do two more things:\n\nResize your figures:\n\nClick on the gear icon in on top of the R Markdown document, and select “Output Options…” in the dropdown menu. In the pop up dialogue box go to the Figures tab and change the height and width of the figures, and hit OK when done. Then, knit your document and see how you like the new sizes. Change and knit again and again until you’re happy with the figure sizes. Note that these values get saved in the YAML.\n\nYou can also use different figure sizes for different figures. To do so click on the gear icon within the chunk where you want to make a change. Changing the figure sizes added new options to these chunks: fig.width and fig.height (click the checkbox next to “Use custom figure size” first. You can change them by defining different values directly in your R Markdown document as well.\n\n\nChange the look of your report:\n\nOnce again click on the gear icon in on top of the R Markdown document, and select “Output Options…” in the dropdown menu. In the General tab of the pop up dialogue box try out different Syntax highlighting and theme options. Hit OK and knit your document to see how it looks. Play around with these until you’re happy with the look."
+  },
+  {
+    "objectID": "labs/Lab01.html#submission",
+    "href": "labs/Lab01.html#submission",
+    "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
+    "section": "Submission",
+    "text": "Submission\nFinally, you need to save your html file and submit it to me on Canvas. Here’s how to do it (see image below for reference):\n\n\nFirst, click the checkbox next to the html file in your files pane.\nNext, click “More” and select “Export”\nSave the html file somewhere on your computer where you can find it (e.g., downloads folder, documents folder, desktop, or a folder you created for the class).\nGo to our class page on canvas and click on “assignments”. Navigate to “Lab 01” under “Labs” and submit just as you would a paper in any other class.\n\nAnd you’re done!"
   }
 ]

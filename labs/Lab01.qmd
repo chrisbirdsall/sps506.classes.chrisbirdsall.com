@@ -28,11 +28,11 @@ Each lab will start with a "Getting started" section but details will be a bit m
 
 ## Open the starter project in RStudio Cloud
 
-Visit [Posit.cloud](https://posit.cloud/) and login using the credentials you setup in our first class. Once you load up RStudio Cloud in your web browser you should see something like this:
+Visit [Posit.cloud](https://posit.cloud/) and login using the credentials you setup in the week 1 module. Once you load up Posit Cloud in your web browser you should see something like this (note the screenshots will have SPS 502 rather than BSU - PPA PhD):
 
 ![](img/rstudio-cloud.png)
 
-In the left side bar you'll see a header, "Space", under which you'll see "Your Workspace" and "SPS 502-F23". Click SPS 502-F23 to view the list of projects associated with our class.
+In the left side bar you'll see a header, "Space", under which you'll see "Your Workspace" and "BSU - PPA PhD". Click BSU - PPA PhD to view the list of projects associated with our class.
 
 There you'll see the Lab 01 starter project, called "Lab 01 - Hello R!".
 
