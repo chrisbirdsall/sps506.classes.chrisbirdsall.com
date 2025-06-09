@@ -271,5 +271,145 @@
     "title": "Lab 01 - R & RStudio & Dinosaurs! Oh my!",
     "section": "Submission",
     "text": "Submission\nFinally, you need to save your html file and submit it to me on Canvas. Here’s how to do it (see image below for reference):\n\n\nFirst, click the checkbox next to the html file in your files pane.\nNext, click “More” and select “Export”\nSave the html file somewhere on your computer where you can find it (e.g., downloads folder, documents folder, desktop, or a folder you created for the class).\nGo to our class page on canvas and click on “assignments”. Navigate to “Lab 01” under “Labs” and submit just as you would a paper in any other class.\n\nAnd you’re done!"
+  },
+  {
+    "objectID": "labs/lab02_SPS509.html",
+    "href": "labs/lab02_SPS509.html",
+    "title": "Lab 02 - Tidy Data",
+    "section": "",
+    "text": "The goal of this lab is to practice importing, tidying, then visualizing and analyzing data."
+  },
+  {
+    "objectID": "labs/lab02_SPS509.html#load-packages",
+    "href": "labs/lab02_SPS509.html#load-packages",
+    "title": "Lab 02 - Tidy Data",
+    "section": "Load packages",
+    "text": "Load packages\n\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "labs/lab02_SPS509.html#import-data",
+    "href": "labs/lab02_SPS509.html#import-data",
+    "title": "Lab 02 - Tidy Data",
+    "section": "Import Data",
+    "text": "Import Data\n\ngapminder_wide &lt;- read_csv(\"data/gapminder_wide.csv\")"
+  },
+  {
+    "objectID": "labs/lab02_SPS509.html#exercise-1",
+    "href": "labs/lab02_SPS509.html#exercise-1",
+    "title": "Lab 02 - Tidy Data",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nHow many observations and how many variables are in the dataset? What does each row represent? Is the dataset tidy? Enter the code you need to get this information and answer the questions.\n\nglimpse(gapminder_wide)"
+  },
+  {
+    "objectID": "labs/lab02_SPS509.html#exercise-2",
+    "href": "labs/lab02_SPS509.html#exercise-2",
+    "title": "Lab 02 - Tidy Data",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nSpoiler: It ain’t tidy! Tidying data can be really tricky in some cases so we’re going to go through this together.\nLet’s look at the data again, but this time we’re going to use the tbl_vars() function from the dyplyr package to just give us a list of all the variables in the dataset.\n\ngapminder_wide %&gt;% \n  tbl_vars()\n\nSo, we see from the output above that each variable has a year at the end of its name (e.g., pop_1952). If we’re interested in analyzing these data, we know we don’t want to have multiple columns for each variable (e.g., a life expectancy column for each year). We want ONE life expectancy variable (column) with values recorded for each year for each country in the dataset. So, let’s use the pivot_longer() function from the dplyr package to make our data tidy:\n\ngapminder_tidy &lt;- gapminder_wide %&gt;% \n  pivot_longer(names_to = c(\".value\", \"year\"),\n               names_sep = \"_\",\n               names_transform = list(year = as.integer),\n              cols = c(-continent, -country))\n\nThis code looks a little bit different than the pivot_longer code we went over in the lecture. For more information about all of these arguments visit the the pivot longer webpage for the tidyrpackage.\n\ngapminder_tidy %&gt;% \n  tbl_vars()"
+  },
+  {
+    "objectID": "labs/lab02_SPS509.html#exercise-3",
+    "href": "labs/lab02_SPS509.html#exercise-3",
+    "title": "Lab 02 - Tidy Data",
+    "section": "Exercise 3",
+    "text": "Exercise 3\nFirst, let’s get a sense of our new tidy dataset. Use the glimpse command to analyze the gapminder_tidy dataframe and answer the following questions:\n\nHow many observations are there?\nHow many variables?\nWhat is the unit of analysis (what does each row represent)? How does this differ from the unit of analysis in the untidy(wide) data you started with?"
+  },
+  {
+    "objectID": "labs/lab02_SPS509.html#exercise-4",
+    "href": "labs/lab02_SPS509.html#exercise-4",
+    "title": "Lab 02 - Tidy Data",
+    "section": "Exercise 4",
+    "text": "Exercise 4\nNext, let’s calculate some basic descriptive statistics to get a sense of our variables. Using code you learned in last week’s lab, answer the following: What is the average population in the tidy dataset?"
+  },
+  {
+    "objectID": "labs/lab02_SPS509.html#exercise-5",
+    "href": "labs/lab02_SPS509.html#exercise-5",
+    "title": "Lab 02 - Tidy Data",
+    "section": "Exercise 5",
+    "text": "Exercise 5\nAverage population for so many countries over many years isn’t super useful to us. How can we come up with a more meaningful average population statistic? Let’s break the data down a bit to find something more interesting. Write and run code to calculate the average population for each year in the dataset.\nOkay, slightly more useful. A lot more people in 2007 than in 1952!"
+  },
+  {
+    "objectID": "labs/lab02_SPS509.html#exercise-6",
+    "href": "labs/lab02_SPS509.html#exercise-6",
+    "title": "Lab 02 - Tidy Data",
+    "section": "Exercise 6",
+    "text": "Exercise 6\nLet’s create a visualization of population over time. One thing we could try is visualizing population over time for each continent. Think about which kind of graph would be best for communicating this.\nThis is a tough one, so here are a couple of hints: before your ggplot command you’ll want to group by year and continent THEN ( %&gt;% ) create the average population variable with the summarize command THEN enter your ggplot code. You’ll also want to add a color=continent argument in your aes()."
+  },
+  {
+    "objectID": "labs/lab04.html",
+    "href": "labs/lab04.html",
+    "title": "Lab 04 - Tidy Data",
+    "section": "",
+    "text": "The goal of this lab is to practice importing, tidying, then visualizing and analyzing data."
+  },
+  {
+    "objectID": "labs/lab04.html#load-packages",
+    "href": "labs/lab04.html#load-packages",
+    "title": "Lab 04 - Tidy Data",
+    "section": "Load packages",
+    "text": "Load packages\n\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "labs/lab04.html#import-data",
+    "href": "labs/lab04.html#import-data",
+    "title": "Lab 04 - Tidy Data",
+    "section": "Import Data",
+    "text": "Import Data\n\ngapminder_wide &lt;- read_csv(\"data/gapminder_wide.csv\")"
+  },
+  {
+    "objectID": "labs/lab04.html#exercise-1",
+    "href": "labs/lab04.html#exercise-1",
+    "title": "Lab 04 - Tidy Data",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nHow many observations and how many variables are in the dataset? What does each row represent? Is the dataset tidy? Enter the code you need to get this information and answer the questions.\n\nglimpse(gapminder_wide)"
+  },
+  {
+    "objectID": "labs/lab04.html#exercise-2",
+    "href": "labs/lab04.html#exercise-2",
+    "title": "Lab 04 - Tidy Data",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nSpoiler: It ain’t tidy! Tidying data can be really tricky in some cases so we’re going to go through this together.\nLet’s look at the data again, but this time we’re going to use the tbl_vars() function from the dyplyr package to just give us a list of all the variables in the dataset.\n\ngapminder_wide %&gt;% \n  tbl_vars()\n\nSo, we see from the output above that each variable has a year at the end of its name (e.g., pop_1952). If we’re interested in analyzing these data, we know we don’t want to have multiple columns for each variable (e.g., a life expectancy column for each year). We want ONE life expectancy variable (column) with values recorded for each year for each country in the dataset. So, let’s use the pivot_longer() function from the dplyr package to make our data tidy:\n\ngapminder_tidy &lt;- gapminder_wide %&gt;% \n  pivot_longer(names_to = c(\".value\", \"year\"),\n               names_sep = \"_\",\n               names_transform = list(year = as.integer),\n              cols = c(-continent, -country))\n\nThis code looks a little bit different than the pivot_longer code we went over in the lecture. For more information about all of these arguments visit the the pivot longer webpage for the tidyrpackage.\n\ngapminder_tidy %&gt;% \n  tbl_vars()"
+  },
+  {
+    "objectID": "labs/lab04.html#exercise-3",
+    "href": "labs/lab04.html#exercise-3",
+    "title": "Lab 04 - Tidy Data",
+    "section": "Exercise 3",
+    "text": "Exercise 3\nFirst, let’s get a sense of our new tidy dataset. Use the glimpse command to analyze the gapminder_tidy dataframe and answer the following questions:\n\nHow many observations are there?\nHow many variables?\nWhat is the unit of analysis (what does each row represent)? How does this differ from the unit of analysis in the untidy(wide) data you started with?"
+  },
+  {
+    "objectID": "labs/lab04.html#exercise-4",
+    "href": "labs/lab04.html#exercise-4",
+    "title": "Lab 04 - Tidy Data",
+    "section": "Exercise 4",
+    "text": "Exercise 4\nNext, let’s calculate some basic descriptive statistics to get a sense of our variables. Using code you learned in last week’s lab, answer the following: What is the average population in the tidy dataset?"
+  },
+  {
+    "objectID": "labs/lab04.html#exercise-5",
+    "href": "labs/lab04.html#exercise-5",
+    "title": "Lab 04 - Tidy Data",
+    "section": "Exercise 5",
+    "text": "Exercise 5\nAverage population for so many countries over many years isn’t super useful to us. How can we come up with a more meaningful average population statistic? Let’s break the data down a bit to find something more interesting. Write and run code to calculate the average population for each year in the dataset.\nOkay, slightly more useful. A lot more people in 2007 than in 1952!"
+  },
+  {
+    "objectID": "labs/lab04.html#exercise-6",
+    "href": "labs/lab04.html#exercise-6",
+    "title": "Lab 04 - Tidy Data",
+    "section": "Exercise 6",
+    "text": "Exercise 6\nLet’s create a visualization of population over time. One thing we could try is visualizing population over time for each continent. Think about which kind of graph would be best for communicating this.\nThis is a tough one, so here are a couple of hints: before your ggplot command you’ll want to group by year and continent THEN ( %&gt;% ) create the average population variable with the summarize command THEN enter your ggplot code. You’ll also want to add a color=continent argument in your aes()."
+  },
+  {
+    "objectID": "labs/lab02_SPS509.html#exercise-7",
+    "href": "labs/lab02_SPS509.html#exercise-7",
+    "title": "Lab 02 - Tidy Data",
+    "section": "Exercise 7",
+    "text": "Exercise 7\nOkay, let’s explore a couple of relationships in the data. We have data for gdp per capita, population, and life expectancy. Make scatterplots showing the relationship between 1) pop and gdpPercap and 2) gdpPercap and lifeExp.\nWhat do you observe about the relationship between these variables?"
+  },
+  {
+    "objectID": "labs/lab02_SPS509.html#exercise-8",
+    "href": "labs/lab02_SPS509.html#exercise-8",
+    "title": "Lab 02 - Tidy Data",
+    "section": "Exercise 8",
+    "text": "Exercise 8\nThink of another visualization independently on your own, write the code, run it, and describe what you’ve done!"
   }
 ]
