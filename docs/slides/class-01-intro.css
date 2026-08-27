@@ -2,7 +2,7 @@
   position: relative;
 }
 
-.agenda-slide::after {
+section.agenda-slide::after {
   content: "";
   position: absolute;
   top: 0;
