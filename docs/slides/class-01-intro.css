@@ -1,0 +1,69 @@
+.agenda-slide {
+  position: relative;
+}
+
+.agenda-slide::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 34%;
+  height: 0.28em;
+  background: linear-gradient(90deg, var(--blue), var(--gold), var(--coral));
+}
+
+.agenda-slide h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.72em;
+  letter-spacing: -0.04em;
+}
+
+.agenda-kicker {
+  margin: 0.22em 0 1.05em;
+  color: var(--coral);
+  font-size: 0.5em;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.agenda-list ol {
+  margin: 0;
+  padding: 0;
+  counter-reset: agenda;
+  list-style: none;
+}
+
+.agenda-list li {
+  display: grid;
+  grid-template-columns: 2.25em minmax(0, 1fr);
+  align-items: baseline;
+  margin: 0;
+  padding: 0.47em 0;
+  border-top: 2px solid rgba(16, 42, 67, 0.16);
+  color: var(--ink);
+  font-size: 0.96em;
+  line-height: 1.15;
+  counter-increment: agenda;
+}
+
+.agenda-list li:last-child {
+  border-bottom: 2px solid rgba(16, 42, 67, 0.16);
+}
+
+.agenda-list li::before {
+  content: counter(agenda) ".";
+  color: var(--blue);
+  font-size: 1.34em;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.agenda-list li:nth-child(2)::before {
+  color: #c58b17;
+}
+
+.agenda-list li:nth-child(3)::before {
+  color: var(--coral);
+}
