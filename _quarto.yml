@@ -3,18 +3,18 @@ project:
   output-dir: docs
 
 website:
-  title: "sps506.classes.chrisbirdsall.com"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+  title: "SPS 506"
+  site-url: "https://sps506.classes.chrisbirdsall.com"
+  navbar: false
+  search: false
 
 format:
   html:
-    theme: cosmo
+    theme:
+      - cosmo
+      - styles.scss
     css: styles.css
-    toc: true
+    toc: false
+    anchor-sections: false
 
 editor: visual
-

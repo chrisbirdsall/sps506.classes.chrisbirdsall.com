@@ -1,1 +1,5 @@
-/* css styles */
+/* Page-specific refinements live here; the shared visual system is in styles.scss. */
+
+#title-block-header {
+  display: none;
+}

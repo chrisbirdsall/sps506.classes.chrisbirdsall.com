@@ -1,19 +1,49 @@
 ---
-title: "sps506.classes.chrisbirdsall.com"
-format: html
-knitr:
-  opts_chunk: 
-    collapse: true
-    comment: "#>" 
-    R.options:
-      knitr.graphics.auto_pdf: true
+pagetitle: "Public Program Evaluation"
+description: "SPS 506-001 Public Program Evaluation, Fall 2026, Boise State University"
+page-layout: full
+title-block-banner: false
 ---
 
-This is a Quarto website.
+::::: {.course-home}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+:::: {.course-hero}
+::: {.hero-copy}
+<div class="hero-kicker">SPS 506-001 <span aria-hidden="true">•</span> Fall 2026</div>
 
-```{r}
-# test
-1 + 1
-```
+<h1>Public Program<br><span>Evaluation</span></h1>
+
+<p class="hero-institution">School of Public Service<br>Boise State University</p>
+:::
+
+::: {.hero-mark aria-hidden="true"}
+<div class="mark-orbit orbit-one"></div>
+<div class="mark-orbit orbit-two"></div>
+<div class="mark-number">506</div>
+<div class="mark-dot"></div>
+:::
+::::
+
+:::: {.course-information}
+::: {.info-panel .instructor-panel}
+<p class="section-label">Instructor</p>
+
+## Chris Birdsall
+
+<p>chrisbirdsall@boisestate.edu</p>
+<p>ERB 1149</p>
+<p>Office hours by appointment</p>
+:::
+
+::: {.info-panel .details-panel}
+<p class="section-label">Course details</p>
+
+## Thursdays
+
+<p>August 27–December 10, 2026</p>
+<p>6:00–8:45 PM</p>
+<p>ILC 401</p>
+:::
+::::
+
+:::::
