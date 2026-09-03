@@ -633,7 +633,7 @@ margin: 0 0 0.32em;
 font-size: 0.62em;
 line-height: 1.28;
 }
-.definition-block p:first-child {
+.definition-block > p:first-child {
 color: var(--coral);
 font-size: 0.7em;
 }
@@ -996,6 +996,81 @@ font-size: 0.67em;
 }
 .rigor-footer {
 margin-top: 0.6em;
+padding: 0.5em 0.62em;
+background: var(--ink);
+color: white;
+font-size: 0.58em;
+line-height: 1.28;
+}
+.pyramid-grid {
+display: grid;
+grid-template-columns: 1.05fr 1.8fr 1.05fr;
+align-items: center;
+gap: 0.5em;
+padding-top: 0.15em;
+}
+.pyramid {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 4px;
+}
+.pyramid > div {
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 2.65em;
+padding: 0.16em 0.5em;
+box-sizing: border-box;
+color: white;
+text-align: center;
+font-size: 0.56em;
+font-weight: 700;
+line-height: 1.14;
+}
+.pyramid > div:nth-child(1) { width: 31%; background: var(--coral); }
+.pyramid > div:nth-child(2) { width: 46%; background: var(--blue); }
+.pyramid > div:nth-child(3) { width: 61%; background: #1a5f79; }
+.pyramid > div:nth-child(4) { width: 75%; background: #17516a; }
+.pyramid > div:nth-child(5) { width: 88%; background: #14415a; }
+.pyramid > div:nth-child(6) { width: 100%; background: var(--ink); }
+.pyramid-left,
+.pyramid-right {
+display: grid;
+gap: 1.15em;
+}
+.pyramid-left {
+justify-items: end;
+text-align: right;
+}
+.pyr-annot {
+padding: 0.06em 0.62em;
+border-right: 4px solid var(--gold);
+}
+.pyramid-right .pyr-annot {
+padding: 0.06em 0 0.06em 0.62em;
+border-right: 0;
+border-left: 4px solid var(--gold);
+text-align: left;
+}
+.pyr-annot strong,
+.pyr-annot small {
+display: block;
+}
+.pyr-annot strong {
+color: var(--ink);
+font-size: 0.55em;
+font-weight: 800;
+line-height: 1.16;
+}
+.pyr-annot small {
+margin-top: 0.14em;
+color: var(--muted);
+font-size: 0.5em;
+line-height: 1.2;
+}
+.pyramid-footer {
+margin-top: 0.72em;
 padding: 0.5em 0.62em;
 background: var(--ink);
 color: white;
@@ -1649,7 +1724,7 @@ margin-right: 0; }
 <p>SPS 506 · Public Program Evaluation · September 3, 2026</p>
 </div>
 <div class="opening-title">
-<p>What do we need to know<br>before we act?</p>
+<p>What do we need to know<br>before we evaluate?</p>
 </div>
 <div class="opening-subtitle">
 <p>Introduction and history of evaluation</p>
@@ -1680,7 +1755,6 @@ display:block!important;
 <li><strong>Why government evaluates</strong></li>
 <li><strong>How an evaluation takes shape</strong></li>
 <li><strong>Apply the ideas to an Idaho program</strong></li>
-<li><strong>Case-study sign-ups</strong></li>
 </ol>
 </div>
 <aside class="notes">
@@ -1738,17 +1812,23 @@ display:block!important;
 <p>“A set of resources and activities directed toward one or more common goals.”</p>
 </div>
 <div class="definition-grid">
-<div class="definition-block">
+<div class="definition-block fragment">
 <p><strong>Resources</strong></p>
+<div class="fragment">
 <p>People, authority, funding, facilities, information</p>
 </div>
-<div class="definition-block">
+</div>
+<div class="definition-block fragment">
 <p><strong>Activities</strong></p>
+<div class="fragment">
 <p>Services, rules, grants, inspections, instruction</p>
 </div>
-<div class="definition-block">
+</div>
+<div class="definition-block fragment">
 <p><strong>Goals</strong></p>
+<div class="fragment">
 <p>The public or nonprofit results the work is meant to advance</p>
+</div>
 </div>
 </div>
 <aside class="notes">
@@ -1904,21 +1984,18 @@ display:block!important;
 <div class="timeline-item">
 <p><span class="timeline-year">2010</span></p>
 <p><strong>GPRAMA</strong></p>
-<p>Expanded the performance-management framework</p>
+<p>Expanded the performance-management framework: regularly updated agency goals with periodic reviews and public reporting requirements</p>
 </div>
 <div class="timeline-item">
 <p><span class="timeline-year">2018</span></p>
 <p><strong>Evidence Act</strong></p>
-<p>Learning agendas, evaluation plans, data access, capacity</p>
+<p>Requires agencies to enhance evidence-building capacities, make data more accessible, and strengthen privacy protections</p>
 </div>
 <div class="timeline-item">
 <p><span class="timeline-year">2021</span></p>
-<p><strong>GAO glossary</strong></p>
-<p>Shared terms for a broader evidence-building system</p>
+<p><strong>Memorandum on Restoring Trust in Gov. Through Scientific Integrity and Evicence-Based Policymaking</strong></p>
+<p>Reaffirms and builds on prior memoranda that require agencies to incorporate scienific integrity principles in data governance and evaluaion approaches</p>
 </div>
-</div>
-<div class="timeline-note">
-<p>These are milestones in chronology—not a claim that one law alone created modern evaluation.</p>
 </div>
 <aside class="notes">
 <p>Facilitation: Keep this compact. The course returns to the Evidence Act in Week 12. The point tonight is institutionalization: federal agencies increasingly must plan how they will build and use evidence.</p>
@@ -2013,9 +2090,6 @@ display:block!important;
 <li><strong>Is performance uncertain or concerning?</strong></li>
 <li><strong>Is the program mature enough to evaluate?</strong></li>
 </ol>
-</div>
-<div class="questions-footer">
-<p>Evaluability is a practical judgment, not a stamp of approval.</p>
 </div>
 <aside class="notes">
 <p>Facilitation: Stress that “not ready for impact evaluation” does not mean “do nothing.” It may indicate a need for program clarification, implementation study, better measures, or data development.</p>
@@ -2120,7 +2194,7 @@ display:block!important;
 </div>
 </div>
 <div class="context-question">
-<p>Which contextual factor most threatens your group’s evaluation—and how would you adapt?</p>
+<p>Which contextual factor most threatens your group’s evaluation and how would you adapt?</p>
 </div>
 <aside class="notes">
 <p>Facilitation: Take adaptations, not just obstacles. Examples include narrowing the question, sequencing a process study before an impact study, adding stakeholder engagement, or improving data systems.</p>
@@ -2159,6 +2233,58 @@ display:block!important;
 <aside class="notes">
 <p>Facilitation: Correct the older deck’s “RCT is the gold standard” shorthand. Methodological strength depends on the question, context, implementation, measurement, and warranted inference. Statistical significance is not “a 95% chance the finding is correct.”</p>
 Sources: Wholey, Hatry, and Newcomer, ch. 1, pp. 13–16; U.S. GAO, GAO-21-404SP (2021), pp. 5–6.
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="credible-findings-are-built-from-the-bottom-up" class="slide level2 pyramid-slide">
+<h2>Credible findings are built from the bottom up</h2>
+<div class="pyramid-grid">
+<div class="pyramid-left">
+<div class="pyr-annot">
+<strong>Improve credibility</strong><small>as levels increase</small>
+</div>
+<div class="pyr-annot">
+<strong>Build a strong base</strong><small>measurement comes first</small>
+</div>
+</div>
+<div class="pyramid">
+<div>
+<span>Clear reporting</span>
+</div>
+<div>
+<span>Statistical conclusion validity</span>
+</div>
+<div>
+<span>Generalizability / transferability</span>
+</div>
+<div>
+<span>Internal validity / confirmability</span>
+</div>
+<div>
+<span>Reliability / auditability of measures</span>
+</div>
+<div>
+<span>Validity / authenticity / trustworthiness of measures</span>
+</div>
+</div>
+<div class="pyramid-right">
+<div class="pyr-annot">
+<strong>Craft findings and recommendations</strong><small>that are credible and supportable</small>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Facilitation: Walk up one level at a time and name what fails if the level below is skipped—an impact estimate built on an unreliable outcome measure, or a well-designed study that no one can read. Each tier carries a quantitative and a qualitative term for the same underlying concern; the terminology differs, the criterion does not. Ask which level is weakest in the group’s own Idaho program, and note that this is usually measurement rather than design.</p>
+Source: Wholey, Hatry, and Newcomer, Handbook of Practical Program Evaluation, 4th ed., ch. 1, Figure 1.2, “Design Evaluation Studies to Provide Credible Findings: The Pyramid of Strength,” p. 15; measure-selection questions, p. 16.
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -2278,7 +2404,7 @@ display:block!important;
 <div class="closing-grid">
 <div class="closing-block">
 <p><strong>Case-study sign-ups</strong></p>
-<p>Choose two class dates with your group.</p>
+<p>Sign-up will be posted soon!</p>
 </div>
 <div class="closing-block">
 <p><strong>Next week</strong></p>
@@ -2286,7 +2412,7 @@ display:block!important;
 </div>
 </div>
 <div class="closing-question">
-<p>What is one decision your evaluation could help someone make?</p>
+<p>Thinking about your evaluation: What is one decision your evaluation could help someone make?</p>
 </div>
 <aside class="notes">
 <p>Facilitation: Complete sign-ups before the closing question. Use the question as a quick round or exit reflection. Remind students that the Evaluation Plan Prospectus is due Sept. 17 at class time.</p>

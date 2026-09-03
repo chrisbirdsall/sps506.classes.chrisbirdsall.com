@@ -169,7 +169,7 @@
   line-height: 1.28;
 }
 
-.definition-block p:first-child {
+.definition-block > p:first-child {
   color: var(--coral);
   font-size: 0.7em;
 }
@@ -602,6 +602,93 @@
 
 .rigor-footer {
   margin-top: 0.6em;
+  padding: 0.5em 0.62em;
+  background: var(--ink);
+  color: white;
+  font-size: 0.58em;
+  line-height: 1.28;
+}
+
+.pyramid-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1.8fr 1.05fr;
+  align-items: center;
+  gap: 0.5em;
+  padding-top: 0.15em;
+}
+
+.pyramid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pyramid > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.65em;
+  padding: 0.16em 0.5em;
+  box-sizing: border-box;
+  color: white;
+  text-align: center;
+  font-size: 0.56em;
+  font-weight: 700;
+  line-height: 1.14;
+}
+
+.pyramid > div:nth-child(1) { width: 31%; background: var(--coral); }
+.pyramid > div:nth-child(2) { width: 46%; background: var(--blue); }
+.pyramid > div:nth-child(3) { width: 61%; background: #1a5f79; }
+.pyramid > div:nth-child(4) { width: 75%; background: #17516a; }
+.pyramid > div:nth-child(5) { width: 88%; background: #14415a; }
+.pyramid > div:nth-child(6) { width: 100%; background: var(--ink); }
+
+.pyramid-left,
+.pyramid-right {
+  display: grid;
+  gap: 1.15em;
+}
+
+.pyramid-left {
+  justify-items: end;
+  text-align: right;
+}
+
+.pyr-annot {
+  padding: 0.06em 0.62em;
+  border-right: 4px solid var(--gold);
+}
+
+.pyramid-right .pyr-annot {
+  padding: 0.06em 0 0.06em 0.62em;
+  border-right: 0;
+  border-left: 4px solid var(--gold);
+  text-align: left;
+}
+
+.pyr-annot strong,
+.pyr-annot small {
+  display: block;
+}
+
+.pyr-annot strong {
+  color: var(--ink);
+  font-size: 0.55em;
+  font-weight: 800;
+  line-height: 1.16;
+}
+
+.pyr-annot small {
+  margin-top: 0.14em;
+  color: var(--muted);
+  font-size: 0.5em;
+  line-height: 1.2;
+}
+
+.pyramid-footer {
+  margin-top: 0.72em;
   padding: 0.5em 0.62em;
   background: var(--ink);
   color: white;
