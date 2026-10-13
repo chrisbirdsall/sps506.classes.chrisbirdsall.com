@@ -9,6 +9,11 @@
         accent  border + header color      wash  panel background
         tint    item box fill              line  item box border
      sections (optional)  per-column colors (overrides program/outcome)
+     exact (optional)     true = draw only the colors listed here (brand themes):
+                          text that would miss AA switches to `ink` instead of
+                          a darkened shade, and templates skip their own tints
+     soft (optional)      with exact: the light fill used where a template would
+                          otherwise mix a tint (Columns panels)
      problem, context, assumptions, free, note   the other boxes
 
    The Custom theme (id 'custom') is built from six colors a student picks;
@@ -84,28 +89,38 @@
     },
     boise: {
       name: 'Boise State',
-      // Official Boise State colors (boisestate.edu/brand): Blue #0033A0 (PMS 286),
-      // Orange #D64309 (PMS 172), accent navy #001F60, lightest gray #F6F7F9.
-      ink: '#001f60', muted: '#4d5b7c', paper: '#f6f7f9', arrow: '#001f60', bracket: '#d64309',
-      program: { accent: '#0033a0', wash: '#ffffff', tint: '#ebf0f9', line: '#b3c2e3' },
-      outcome: { accent: '#d64309', wash: '#fdf1ec', tint: '#ffffff', line: '#f0b9a3' },
+      exact: true, soft: '#f6f7f9',
+      // Boise State brand colors (boisestate.edu/brand/visual-identity/colors),
+      // digital values as the brand's own contrast-grid link lists them:
+      //   official  Blue #0033A0 (PMS 286C), Orange #D64309 (PMS 172C)
+      //   neutral   Lightest gray #F6F7F9, Cool Gray 1C #D9D9D6, 3C #C8C9C7,
+      //             7C #97999B, 11C #53565A, 446C #3F4444
+      //   secondary #001F60 (PMS 2757C), #006BA6, #0072CE, #406098; accents
+      //             only, 20% or less, never in place of blue and orange.
+      // Only these values are used (no tints), white backs the orange so it
+      // stays true orange at AA (4.5:1 on white), and navy is kept to text.
+      ink: '#001f60', muted: '#53565a', paper: '#f6f7f9', arrow: '#001f60', bracket: '#d64309',
+      program: { accent: '#0033a0', wash: '#ffffff', tint: '#f6f7f9', line: '#c8c9c7' },
+      outcome: { accent: '#d64309', wash: '#ffffff', tint: '#ffffff', line: '#c8c9c7' },
       problem: { fill: '#f6f7f9', stroke: '#0033a0', label: '#0033a0' },
-      context: { fill: '#001f60', text: '#ffffff', label: '#ffb38f' },
-      assumptions: { fill: '#f6f7f9', stroke: '#4d5b7c', label: '#001f60' },
+      context: { fill: '#0033a0', text: '#ffffff', label: '#d9d9d6' },
+      assumptions: { fill: '#f6f7f9', stroke: '#53565a', label: '#001f60' },
       free: { fill: '#ffffff', stroke: '#001f60' },
-      note: { fill: '#fdf1ec', stroke: '#e58a64' }
+      note: { fill: '#f6f7f9', stroke: '#d64309' }
     },
     boiseBlue: {
       name: 'Boise State blue',
-      // Blue throughout, with Boise State orange kept to small accents (brackets).
-      ink: '#001f60', muted: '#4d5b7c', paper: '#f6f7f9', arrow: '#0033a0', bracket: '#d64309',
-      program: { accent: '#0033a0', wash: '#ffffff', tint: '#ffffff', line: '#b3c2e3' },
-      outcome: { accent: '#001f60', wash: '#eef1f8', tint: '#ffffff', line: '#a7b2cc' },
-      problem: { fill: '#ebf0f9', stroke: '#0033a0', label: '#0033a0' },
-      context: { fill: '#f6f7f9', text: '#001f60', label: '#d64309' },
+      exact: true, soft: '#f6f7f9',
+      // Boise State Blue throughout, with Boise State Orange as a small accent
+      // (the Control / Influence brackets and sticky notes). Same brand values as above.
+      ink: '#001f60', muted: '#53565a', paper: '#f6f7f9', arrow: '#0033a0', bracket: '#d64309',
+      program: { accent: '#0033a0', wash: '#ffffff', tint: '#ffffff', line: '#c8c9c7' },
+      outcome: { accent: '#0033a0', wash: '#f6f7f9', tint: '#ffffff', line: '#c8c9c7' },
+      problem: { fill: '#f6f7f9', stroke: '#0033a0', label: '#0033a0' },
+      context: { fill: '#f6f7f9', text: '#001f60', label: '#0033a0' },
       assumptions: { fill: '#ffffff', stroke: '#0033a0', label: '#001f60' },
       free: { fill: '#ffffff', stroke: '#001f60' },
-      note: { fill: '#fdf1ec', stroke: '#e58a64' }
+      note: { fill: '#f6f7f9', stroke: '#d64309' }
     },
     forest: {
       name: 'Forest',
@@ -224,6 +239,16 @@
     return { id: id, key: id, theme: THEMES[id] };
   }
 
+  /**
+   * `fg` as text on every one of `bgs` at AA: darkened as needed, or, in an
+   * exact (brand) theme, kept as is when it passes and swapped for the
+   * theme's ink when it doesn't, so no off-palette shade is ever drawn.
+   */
+  function readable(th, fg, bgs) {
+    if (!th.exact) return U.ensureContrast(fg, bgs, 4.5);
+    return [].concat(bgs).every(function (b) { return U.contrast(fg, b) >= 4.5; }) ? fg : th.ink;
+  }
+
   var SECTION_WORD = { inputs: 'inputs', activities: 'activities', outputs: 'outputs', shortTerm: 'short-term', intermediate: 'intermediate', longTerm: 'long-term' };
 
   /**
@@ -279,13 +304,13 @@
       tint: tint,
       line: line,
       // Text in the accent color (headers): darkened until AA on wash + tint + white.
-      // (Also on the theme paper: structure labels sit on the page.)
-      text: U.ensureContrast(accent, [wash, tint, '#ffffff', th.paper], 4.5),
+      // (Labels that sit on the page itself are checked against it in content.js.)
+      text: readable(th, accent, [wash, tint, '#ffffff']),
       chip: accent, // solid header chip (Columns template) …
       on: '#ffffff' // … and the text on it (fixed up below for AA)
     };
     if (U.contrast('#ffffff', accent) < 4.5) {
-      if (U.contrast(th.ink, accent) >= 4.5) t.on = th.ink;
+      if (U.contrast(th.ink, accent) >= 4.5 || th.exact) t.on = th.ink;
       else t.chip = U.ensureContrast(accent, '#ffffff', 4.5); // darken the chip so white text passes
     }
     cache[key] = t;
@@ -302,6 +327,7 @@
     valid: function (id) { return !!THEMES[id] || id === 'custom'; },
     get: function (which) { return resolve(which).theme; },
     tokens: tokens,
+    readable: readable,
     keyColors: keyColors,
     cleanCustom: cleanCustom,
     /**

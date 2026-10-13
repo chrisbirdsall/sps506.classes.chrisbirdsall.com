@@ -259,7 +259,7 @@
       switch (role) {
         case 'problem': Object.assign(st, { shape: 'rounded', radius: 6, stroke: 'none', pad: 14, padY: 10 }); break;
         case 'header': Object.assign(st, { shape: 'rounded', radius: 4, fill: tok.chip, textColor: tok.on, pad: 6, padY: 6 }); break;
-        case 'panel': Object.assign(st, { shape: 'rounded', radius: 6, stroke: 'none', fill: U.mix(tok.accent, '#ffffff', 0.9) }); break;
+        case 'panel': Object.assign(st, { shape: 'rounded', radius: 6, stroke: 'none', fill: th.exact ? th.soft || tok.wash : U.mix(tok.accent, '#ffffff', 0.9) }); break;
         case 'item': Object.assign(st, { shape: 'rect', radius: 3, fill: '#ffffff', stroke: tok.line, accentBar: tok.accent, align: 'left', pad: 8, padY: 6 }); break;
         case 'context': Object.assign(st, { radius: 6 }); break;
         default: break;
@@ -270,7 +270,7 @@
         var from = edge.from && edge.from.replace(/^pnl-/, '');
         var tok = TH.tokens(x.doc.diagram, from);
         st.look = 'block';
-        st.fill = U.mix(tok.accent, '#ffffff', 0.25);
+        st.fill = x.theme.exact ? tok.accent : U.mix(tok.accent, '#ffffff', 0.25);
         st.color = st.fill;
       }
     },

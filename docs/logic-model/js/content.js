@@ -66,6 +66,8 @@
     var sec = sectionOf(node);
     var tok = TH.tokens(dg, sec || (node.link && node.link.part === 'outcome' ? 'shortTerm' : 'inputs'));
     var sw = th.strokeScale || 1;
+    // Bracket and structure labels sit on the page: AA against the page color in use.
+    var pageBg = dg.background === 'paper' ? th.paper : '#ffffff';
     var st = {
       shape: 'rect', fill: 'none', stroke: 'none', strokeWidth: 1.5 * sw, dash: 'solid', radius: 0,
       textColor: th.ink, labelColor: th.ink, fontSize: B, bold: false, italic: false,
@@ -77,7 +79,7 @@
       case 'theory':
         return Object.assign(st, { shape: 'text', textColor: th.muted, italic: true, align: 'left', valign: 'top', pad: 0, padY: 0, fontSize: B * 1.02 });
       case 'problem':
-        return Object.assign(st, { shape: 'chevron', fill: th.problem.fill, stroke: th.problem.stroke, labelColor: U.ensureContrast(th.problem.label, th.problem.fill, 4.5), align: 'left', pad: 9, padY: 8 });
+        return Object.assign(st, { shape: 'chevron', fill: th.problem.fill, stroke: th.problem.stroke, labelColor: TH.readable(th, th.problem.label, th.problem.fill), align: 'left', pad: 9, padY: 8 });
       case 'header':
         return Object.assign(st, { shape: 'text', textColor: tok.text, bold: true, fontSize: B * 1.05, pad: 2, padY: 1 });
       case 'panel':
@@ -87,18 +89,18 @@
       case 'context':
         return Object.assign(st, {
           shape: 'rounded', radius: 10, fill: th.context.fill, textColor: th.context.text,
-          labelColor: U.ensureContrast(th.context.label, th.context.fill, 4.5), align: 'left', valign: 'top', pad: 14, padY: 10, fontSize: B * 0.98
+          labelColor: TH.readable(th, th.context.label, th.context.fill), align: 'left', valign: 'top', pad: 14, padY: 10, fontSize: B * 0.98
         });
       case 'assumptions':
         return Object.assign(st, {
           shape: 'rounded', radius: 6, fill: th.assumptions.fill, stroke: th.assumptions.stroke, dash: 'dashed', strokeWidth: 1.2 * sw,
-          labelColor: U.ensureContrast(th.assumptions.label, th.assumptions.fill, 4.5), align: 'left', valign: 'top', pad: 14, padY: 10, fontSize: B * 0.98
+          labelColor: TH.readable(th, th.assumptions.label, th.assumptions.fill), align: 'left', valign: 'top', pad: 14, padY: 10, fontSize: B * 0.98
         });
       case 'bracket':
-        return Object.assign(st, { shape: 'bracket', stroke: th.bracket, strokeWidth: 2.5 * sw, textColor: U.ensureContrast(th.bracket, ['#ffffff', th.paper], 4.5), bold: true, italic: true, fontSize: B * 1.3, pad: 0, padY: 0 });
+        return Object.assign(st, { shape: 'bracket', stroke: th.bracket, strokeWidth: 2.5 * sw, textColor: TH.readable(th, th.bracket, pageBg), bold: true, italic: true, fontSize: B * 1.3, pad: 0, padY: 0 });
       case 'structure': {
         var t2 = TH.tokens(dg, node.link && node.link.part === 'outcome' ? 'shortTerm' : 'inputs');
-        return Object.assign(st, { shape: 'bracket', stroke: t2.accent, strokeWidth: 2 * sw, textColor: t2.text, bold: true, fontSize: B * 1.15, pad: 0, padY: 0 });
+        return Object.assign(st, { shape: 'bracket', stroke: t2.accent, strokeWidth: 2 * sw, textColor: TH.readable(th, t2.text, pageBg), bold: true, fontSize: B * 1.15, pad: 0, padY: 0 });
       }
       case 'world':
         return Object.assign(st, { shape: 'text', textColor: th.muted, italic: true, fontSize: B * 1.1, pad: 0, padY: 0, valign: 'bottom' });
@@ -110,7 +112,7 @@
         var f = { fill: th.free.fill, stroke: th.free.stroke, radius: shape === 'rect' ? 0 : 8 };
         if (shape === 'note') f = { fill: th.note.fill, stroke: th.note.stroke };
         if (shape === 'text') f = { fill: 'none', stroke: 'none' };
-        if (shape === 'bracket') f = { fill: 'none', stroke: th.bracket, strokeWidth: 2.5 * sw, textColor: U.ensureContrast(th.bracket, ['#ffffff', th.paper], 4.5), bold: true, italic: true, fontSize: B * 1.2 };
+        if (shape === 'bracket') f = { fill: 'none', stroke: th.bracket, strokeWidth: 2.5 * sw, textColor: TH.readable(th, th.bracket, pageBg), bold: true, italic: true, fontSize: B * 1.2 };
         return Object.assign(st, f, { shape: shape, pad: 8, padY: 6 });
       }
     }
