@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Logic Model Builder · SPS 506</title>
+  <meta name="description" content="Build a program logic model for SPS 506: type the parts, arrange the diagram, export it for Word. Everything stays in your browser.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/app.css">
+  <!-- Classic scripts, in dependency order. Each adds itself to window.LMB. -->
+  <script defer src="js/util.js"></script>
+  <script defer src="js/text.js"></script>
+  <script defer src="js/themes.js"></script>
+  <script defer src="js/model.js"></script>
+  <script defer src="js/examples.js"></script>
+  <script defer src="js/content.js"></script>
+  <script defer src="js/templates.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/render.js"></script>
+  <script defer src="js/history.js"></script>
+  <script defer src="js/store.js"></script>
+  <script defer src="js/form.js"></script>
+  <script defer src="js/editor.js"></script>
+  <script defer src="js/inspector.js"></script>
+  <script defer src="js/export.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="9" width="8" height="14" rx="1.5" fill="#176b87"/><rect x="12" y="9" width="8" height="14" rx="1.5" fill="#e5ad3d"/><rect x="22" y="9" width="8" height="14" rx="1.5" fill="#c24f3d"/></svg>
+        <div class="brand-text">
+          <span class="brand-kicker">SPS 506</span>
+          <span class="brand-name">Logic Model Builder</span>
+        </div>
+      </div>
+      <nav class="steps" role="tablist" aria-label="Steps">
+        <button type="button" role="tab" class="step" id="tab-write" data-step="write" aria-controls="view-write" aria-selected="true"><span class="step-num">1</span><span class="step-label">Write</span></button>
+        <button type="button" role="tab" class="step" id="tab-design" data-step="design" aria-controls="view-design" aria-selected="false" tabindex="-1"><span class="step-num">2</span><span class="step-label">Design</span></button>
+        <button type="button" role="tab" class="step" id="tab-export" data-step="export" aria-controls="view-export" aria-selected="false" tabindex="-1"><span class="step-num">3</span><span class="step-label">Export</span></button>
+      </nav>
+      <div class="top-actions">
+        <div class="menu" id="file-menu"></div>
+        <div class="btn-pair" role="group" aria-label="History">
+          <button type="button" class="icon-btn" id="btn-undo" aria-label="Undo" disabled></button>
+          <button type="button" class="icon-btn" id="btn-redo" aria-label="Redo" disabled></button>
+        </div>
+        <!-- Not a live region: it changes on every typing pause. A failure to
+             save is announced once through the toasts instead (app.js). -->
+        <span class="save-status" id="save-status"></span>
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <section id="view-write" class="view view-write" role="tabpanel" aria-labelledby="tab-write">
+        <div class="write-form" id="write-form"></div>
+        <aside class="write-preview" aria-label="Live preview">
+          <div class="preview-card">
+            <div class="preview-head">
+              <h2 class="preview-title">Live preview</h2>
+              <button type="button" class="btn btn-primary btn-sm" id="btn-to-design">Design <span aria-hidden="true">&rarr;</span></button>
+            </div>
+            <div class="preview-frame" id="write-preview"></div>
+            <p class="preview-note" id="preview-note"></p>
+          </div>
+        </aside>
+      </section>
+
+      <section id="view-design" class="view view-design" role="tabpanel" aria-labelledby="tab-design" hidden>
+        <!-- Each step has its own level-one heading (Write's is visible in the form). -->
+        <h1 class="sr-only">Design your logic model</h1>
+        <div class="toolbar" id="toolbar" role="toolbar" aria-label="Diagram tools"></div>
+        <div class="canvas-wrap" id="canvas-wrap">
+          <svg id="canvas" class="canvas" tabindex="0" role="application" aria-label="Diagram canvas" aria-describedby="canvas-keys">
+            <defs>
+              <pattern id="dotgrid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="0.75" cy="0.75" r="0.75" class="grid-dot"/></pattern>
+              <filter id="pageshadow" x="-5%" y="-5%" width="110%" height="110%"><feDropShadow dx="0" dy="1.5" stdDeviation="3" flood-color="#102a43" flood-opacity="0.16"/></filter>
+            </defs>
+            <g id="viewport">
+              <g id="layer-bg"></g>
+              <g id="layer-diagram"></g>
+              <g id="layer-overlay"></g>
+            </g>
+          </svg>
+          <p class="sr-only" id="canvas-keys">Press ] or [ to select the next or previous box or arrow. Arrow keys move the selection, Shift with an arrow key moves it further. Enter edits its text. Delete removes it. Escape clears the selection, and the Properties panel then shows the diagram settings. To connect two boxes, press A, select the first box and press Enter, then select the second and press Enter. Tab moves on to the zoom controls and the Properties panel.</p>
+          <div class="canvas-notice" id="canvas-notice" role="status" hidden></div>
+          <div class="zoom-ctl" id="zoom-ctl"></div>
+        </div>
+        <aside class="inspector" id="inspector" aria-label="Properties"></aside>
+      </section>
+
+      <section id="view-export" class="view view-export" role="tabpanel" aria-labelledby="tab-export" hidden>
+        <h1 class="sr-only">Export your logic model</h1>
+        <div class="export-main" id="export-main"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>SPS 506 · Public Program Evaluation · Boise State University</span>
+      <span class="footer-privacy">Saved in this browser only. Nothing you type is uploaded.</span>
+    </footer>
+  </div>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <div id="dialog-root"></div>
+  <input type="file" id="file-input" accept=".json,application/json" hidden>
+  <div id="print-area" class="print-area"></div>
+  <noscript><p class="noscript">The Logic Model Builder needs JavaScript turned on.</p></noscript>
+</body>
+</html>
