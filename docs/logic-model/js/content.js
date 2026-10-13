@@ -62,9 +62,9 @@
   function baseStyle(doc, node) {
     var dg = doc.diagram;
     var B = dg.baseFontSize;
-    var th = TH.get(dg.theme);
+    var th = TH.get(dg);
     var sec = sectionOf(node);
-    var tok = TH.tokens(dg.theme, sec || (node.link && node.link.part === 'outcome' ? 'shortTerm' : 'inputs'));
+    var tok = TH.tokens(dg, sec || (node.link && node.link.part === 'outcome' ? 'shortTerm' : 'inputs'));
     var sw = th.strokeScale || 1;
     var st = {
       shape: 'rect', fill: 'none', stroke: 'none', strokeWidth: 1.5 * sw, dash: 'solid', radius: 0,
@@ -95,9 +95,9 @@
           labelColor: U.ensureContrast(th.assumptions.label, th.assumptions.fill, 4.5), align: 'left', valign: 'top', pad: 14, padY: 10, fontSize: B * 0.98
         });
       case 'bracket':
-        return Object.assign(st, { shape: 'bracket', stroke: th.bracket, strokeWidth: 2.5 * sw, textColor: U.ensureContrast(th.bracket, '#ffffff', 4.5), bold: true, italic: true, fontSize: B * 1.3, pad: 0, padY: 0 });
+        return Object.assign(st, { shape: 'bracket', stroke: th.bracket, strokeWidth: 2.5 * sw, textColor: U.ensureContrast(th.bracket, ['#ffffff', th.paper], 4.5), bold: true, italic: true, fontSize: B * 1.3, pad: 0, padY: 0 });
       case 'structure': {
-        var t2 = TH.tokens(dg.theme, node.link && node.link.part === 'outcome' ? 'shortTerm' : 'inputs');
+        var t2 = TH.tokens(dg, node.link && node.link.part === 'outcome' ? 'shortTerm' : 'inputs');
         return Object.assign(st, { shape: 'bracket', stroke: t2.accent, strokeWidth: 2 * sw, textColor: t2.text, bold: true, fontSize: B * 1.15, pad: 0, padY: 0 });
       }
       case 'world':
@@ -110,7 +110,7 @@
         var f = { fill: th.free.fill, stroke: th.free.stroke, radius: shape === 'rect' ? 0 : 8 };
         if (shape === 'note') f = { fill: th.note.fill, stroke: th.note.stroke };
         if (shape === 'text') f = { fill: 'none', stroke: 'none' };
-        if (shape === 'bracket') f = { fill: 'none', stroke: th.bracket, strokeWidth: 2.5 * sw, textColor: U.ensureContrast(th.bracket, '#ffffff', 4.5), bold: true, italic: true, fontSize: B * 1.2 };
+        if (shape === 'bracket') f = { fill: 'none', stroke: th.bracket, strokeWidth: 2.5 * sw, textColor: U.ensureContrast(th.bracket, ['#ffffff', th.paper], 4.5), bold: true, italic: true, fontSize: B * 1.2 };
         return Object.assign(st, f, { shape: shape, pad: 8, padY: 6 });
       }
     }
@@ -123,8 +123,8 @@
     if (tpl.style && node.role !== 'free') {
       var sec = sectionOf(node);
       tpl.style(node.role, st, {
-        doc: doc, node: node, theme: TH.get(doc.diagram.theme),
-        tok: TH.tokens(doc.diagram.theme, sec || 'inputs'), B: doc.diagram.baseFontSize
+        doc: doc, node: node, theme: TH.get(doc.diagram),
+        tok: TH.tokens(doc.diagram, sec || 'inputs'), B: doc.diagram.baseFontSize
       });
     }
     if (node.shape && node.shape !== st.shape) {
@@ -143,7 +143,7 @@
 
   /** Style for an arrow (edge). */
   C.edgeStyle = function (doc, edge) {
-    var th = TH.get(doc.diagram.theme);
+    var th = TH.get(doc.diagram);
     var sw = th.strokeScale || 1;
     var st = { color: th.arrow, width: 1.6 * sw, dash: 'solid', head: 'end', look: 'line', fill: th.arrow, labelColor: th.ink, fontSize: doc.diagram.baseFontSize * 0.95 };
     if (edge.auto && /^ae-ctx/.test(edge.id)) { st.color = th.ink; st.width = 1.5 * sw; }
@@ -246,16 +246,24 @@
     return [list.slice(0, k), list.slice(k)];
   }
 
+  /** Roles whose whole text is a heading or label, set in the heading font. */
+  var HEADING_ROLES = { title: 1, header: 1, bracket: 1, structure: 1, world: 1 };
+  /** The font stack a node's text is set in (heading font or main font). */
+  C.stackFor = function (doc, node) {
+    return HEADING_ROLES[node.role] ? T.headingStack(doc.diagram) : T.stack(doc.diagram.fontFamily);
+  };
+
   /**
    * Wrapped text for a node whose text area is `w` wide.
    * Returns {lines, height}; line x/y are relative to the text area.
    */
   C.layoutText = function (doc, node, st, w) {
     var stack = T.stack(doc.diagram.fontFamily);
+    var hs = T.headingStack(doc.diagram);
     var c = doc.content;
     var fs = st.fontSize;
     if (node.role === 'problem') {
-      var label = para(C.LABELS.problem, st, { bold: true, color: st.labelColor, size: fs * 0.92, italic: false });
+      var label = para(C.LABELS.problem, st, { bold: true, color: st.labelColor, size: fs * 0.92, italic: false, stack: hs });
       var body = U.isBlank(c.problem) ? null : para(c.problem.trim(), st, { before: fs * 0.3 });
       if (w >= 520 && body) { // wide band: label on the left, statement on the right
         return columns([{ w: U.clamp(w * 0.14, 100, 150), paras: [Object.assign({}, label, { align: 'left' })] }, { paras: [Object.assign({}, body, { before: 0 })] }], w, 16, stack);
@@ -263,17 +271,17 @@
       return T.layoutParas(body ? [label, body] : [label], w, stack);
     }
     if (node.role === 'context') {
-      var tt = [para(C.LABELS.contextTitle, st, { bold: true, size: fs * 1.08, italic: false, align: 'left' }),
+      var tt = [para(C.LABELS.contextTitle, st, { bold: true, size: fs * 1.08, italic: false, align: 'left', stack: hs }),
         para(C.LABELS.contextSub, st, { size: fs * 0.9, before: 1, italic: false, align: 'left' })];
       var groups = M.CONTEXT.map(function (k) {
-        return [para(c.sections[k].label, st, { bold: true, color: st.labelColor, size: fs * 0.95, italic: false, align: 'left' })].concat(bullets(doc, k, st));
+        return [para(c.sections[k].label, st, { bold: true, color: st.labelColor, size: fs * 0.95, italic: false, align: 'left', stack: hs })].concat(bullets(doc, k, st));
       });
       if (w >= 600) return columns([{ w: U.clamp(w * 0.14, 110, 150), paras: tt }, { paras: groups[0] }, { paras: groups[1] }], w, 22, stack);
       if (w >= 330) return stackBlocks([T.layoutParas(tt, w, stack), columns([{ paras: groups[0] }, { paras: groups[1] }], w, 16, stack)], fs * 0.5);
       return stackBlocks([T.layoutParas(tt, w, stack), T.layoutParas(groups[0], w, stack), T.layoutParas(groups[1], w, stack)], fs * 0.5);
     }
     if (node.role === 'assumptions') {
-      var lab = [para(c.sections.assumptions.label, st, { bold: true, color: st.labelColor, size: fs * 1.08, italic: false, align: 'left' })];
+      var lab = [para(c.sections.assumptions.label, st, { bold: true, color: st.labelColor, size: fs * 1.08, italic: false, align: 'left', stack: hs })];
       var bl = bullets(doc, 'assumptions', st);
       if (w >= 600) {
         var h2 = half(bl);
@@ -287,7 +295,7 @@
     }
     // Trailing spaces / line breaks (say, pasted from Word) would add an empty line.
     var text = (C.text(doc, node) || '').replace(/\s+$/, '');
-    return T.layoutParas([para(text, st)], w, stack);
+    return T.layoutParas([para(text, st, HEADING_ROLES[node.role] ? { stack: hs } : null)], w, stack);
   };
 
   /* ---------------------------------------------------------------------------

@@ -117,6 +117,7 @@
       template: 'handbook',
       theme: 'sps506',
       fontFamily: 'avenir',
+      headingFont: 'same', // a font key, or 'same' to use fontFamily for headings too
       baseFontSize: 11,
       page: 'letter-landscape',
       background: 'white',
@@ -210,8 +211,10 @@
     var g = raw.diagram || {};
     var dd = d.diagram;
     dd.template = LMB.templates && LMB.templates.get(g.template) ? g.template : dd.template;
-    dd.theme = LMB.themes.THEMES[g.theme] ? g.theme : dd.theme;
+    dd.theme = LMB.themes.valid(g.theme) ? g.theme : dd.theme;
+    if (g.custom && typeof g.custom === 'object') dd.custom = LMB.themes.cleanCustom(g.custom);
     dd.fontFamily = LMB.text.FONTS[g.fontFamily] ? g.fontFamily : dd.fontFamily;
+    dd.headingFont = LMB.text.FONTS[g.headingFont] ? g.headingFont : 'same';
     dd.baseFontSize = U.clamp(num(g.baseFontSize, dd.baseFontSize), 6, 32);
     dd.page = PAGES[g.page] ? g.page : dd.page;
     dd.background = ['white', 'transparent', 'paper'].indexOf(g.background) >= 0 ? g.background : dd.background;

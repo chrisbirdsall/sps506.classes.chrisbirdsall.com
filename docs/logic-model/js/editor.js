@@ -1126,7 +1126,7 @@
     var MIN_PX = 13;
     var k = Math.max(1, MIN_PX / (st.fontSize * z));
     var fs = st.fontSize * z * k;
-    ta.style.font = (st.italic ? 'italic ' : '') + (st.bold ? '700 ' : '400 ') + fs + 'px ' + T.stack(S.doc.diagram.fontFamily);
+    ta.style.font = (st.italic ? 'italic ' : '') + (st.bold ? '700 ' : '400 ') + fs + 'px ' + C.stackFor(S.doc, nd);
     ta.style.lineHeight = String(T.LINE_HEIGHT);
     ta.style.textAlign = st.align;
     ta.style.color = st.textColor;

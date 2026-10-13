@@ -6,7 +6,9 @@
    <canvas>. The canvas uses exactly the same font stack the SVG uses, so what
    is measured is what is drawn.
 
-   FONT CHOICES live in T.FONTS below. Only installed system fonts are used —
+   FONT CHOICES live in T.FONTS below. A diagram has a main font
+   (diagram.fontFamily) and a heading font (diagram.headingFont, 'same' =
+   the main font) for the title, column headers, brackets and box labels. Only installed system fonts are used —
    nothing is downloaded.
    ========================================================================== */
 (function () {
@@ -14,14 +16,52 @@
   var LMB = window.LMB;
   var T = {};
 
-  /** Font choices shown in the Design panel. `stack` is the CSS font-family. */
+  /**
+   * Font choices shown in the Design panel, grouped by `group`. `stack` is
+   * the CSS font-family: each starts with the Mac name, then the Windows /
+   * Office name, then a close fallback, so a model looks much the same on any
+   * computer. `has` lists the families that count as "installed" (see T.installed).
+   */
   T.FONTS = {
-    avenir: { label: 'Avenir (course look)', stack: '"Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif' },
-    sans: { label: 'Helvetica / Arial', stack: '"Helvetica Neue", Helvetica, Arial, sans-serif' },
-    serif: { label: 'Times New Roman', stack: '"Times New Roman", Times, serif' },
-    georgia: { label: 'Georgia', stack: 'Georgia, "Times New Roman", serif' }
+    avenir: { label: 'Avenir (course look)', group: 'Sans serif', has: ['Avenir Next', 'Avenir'], stack: '"Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif' },
+    sans: { label: 'Helvetica / Arial', group: 'Sans serif', has: ['Helvetica Neue', 'Helvetica', 'Arial'], stack: '"Helvetica Neue", Helvetica, Arial, sans-serif' },
+    calibri: { label: 'Calibri (Word)', group: 'Sans serif', has: ['Calibri', 'Carlito'], stack: 'Calibri, Carlito, "Segoe UI", "Helvetica Neue", Arial, sans-serif' },
+    verdana: { label: 'Verdana', group: 'Sans serif', has: ['Verdana'], stack: 'Verdana, Geneva, "DejaVu Sans", sans-serif' },
+    trebuchet: { label: 'Trebuchet', group: 'Sans serif', has: ['Trebuchet MS'], stack: '"Trebuchet MS", "Lucida Grande", "Segoe UI", sans-serif' },
+    gill: { label: 'Gill Sans', group: 'Sans serif', has: ['Gill Sans', 'Gill Sans MT'], stack: '"Gill Sans", "Gill Sans MT", Calibri, "Segoe UI", sans-serif' },
+    futura: { label: 'Futura / Century Gothic', group: 'Sans serif', has: ['Futura', 'Century Gothic'], stack: 'Futura, "Century Gothic", "Avenir Next", "Segoe UI", sans-serif' },
+    serif: { label: 'Times New Roman', group: 'Serif', has: ['Times New Roman', 'Times'], stack: '"Times New Roman", Times, serif' },
+    georgia: { label: 'Georgia', group: 'Serif', has: ['Georgia'], stack: 'Georgia, "Times New Roman", serif' },
+    palatino: { label: 'Palatino', group: 'Serif', has: ['Palatino', 'Palatino Linotype', 'Book Antiqua'], stack: 'Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif' },
+    baskerville: { label: 'Baskerville', group: 'Serif', has: ['Baskerville', 'Baskerville Old Face'], stack: 'Baskerville, "Baskerville Old Face", Georgia, serif' },
+    rockwell: { label: 'Rockwell (slab)', group: 'Display', has: ['Rockwell', 'Rockwell Nova'], stack: 'Rockwell, "Rockwell Nova", "Roboto Slab", Georgia, serif' },
+    typewriter: { label: 'Typewriter', group: 'Display', has: ['American Typewriter', 'Courier New'], stack: '"American Typewriter", "Courier New", Courier, monospace' }
   };
   T.stack = function (key) { return (T.FONTS[key] || T.FONTS.avenir).stack; };
+  /** The font for headings, titles and labels: diagram.headingFont, or the main font. */
+  T.headingStack = function (dg) { return T.stack(T.FONTS[dg.headingFont] ? dg.headingFont : dg.fontFamily); };
+
+  /**
+   * Is a font choice installed on this computer? A family is there when text
+   * set in it measures differently from the generic fallbacks. (Cached; the
+   * Design panel marks missing ones, which then show in the next font down
+   * the stack.)
+   */
+  var installedCache = {};
+  T.installed = function (key) {
+    if (key in installedCache) return installedCache[key];
+    var f = T.FONTS[key];
+    if (!f) return false;
+    var c = getCtx();
+    var probe = 'mmmmmmmmmmlli WWW 0123';
+    var widthIn = function (family) { c.font = '32px ' + family; return c.measureText(probe).width; };
+    var bases = ['monospace', 'serif', 'sans-serif'].map(function (g) { return [g, widthIn(g)]; });
+    var yes = f.has.some(function (fam) {
+      return bases.some(function (b) { return widthIn('"' + fam + '", ' + b[0]) !== b[1]; });
+    });
+    installedCache[key] = yes;
+    return yes;
+  };
 
   /** Line height as a multiple of font size. */
   T.LINE_HEIGHT = 1.26;
@@ -54,7 +94,7 @@
     return w;
   };
   /** Forget cached widths (called once system fonts have finished loading). */
-  T.clearCache = function () { cache.clear(); };
+  T.clearCache = function () { cache.clear(); installedCache = {}; };
 
   /**
    * Pieces of a word where a line may break after a hyphen ("first-" /
@@ -113,7 +153,8 @@
 
   /**
    * Lay out a list of paragraphs inside a box of the given width.
-   *   paras: [{text, size, bold, italic, color, align, bullet, before}]
+   *   paras: [{text, size, bold, italic, color, align, bullet, before, stack}]
+   * (`stack` sets a paragraph's own font, for labels in the heading font.)
    * Returns {lines: [{text, x, y, size, bold, italic, color, anchor}], height, broken}
    * where y is the text baseline measured from the top of the box, and
    * broken counts words split inside the word (see T.wrap).
@@ -125,7 +166,7 @@
     var broken = 0;
     paras.forEach(function (p) {
       if (p.text == null) return;
-      var spec = { size: p.size, bold: !!p.bold, italic: !!p.italic, stack: stack };
+      var spec = { size: p.size, bold: !!p.bold, italic: !!p.italic, stack: p.stack || stack };
       var lh = p.size * T.LINE_HEIGHT;
       if (!first) y += p.before != null ? p.before : 0;
       first = false;
@@ -142,7 +183,8 @@
         var x = align === 'center' ? indent + (width - indent) / 2 : align === 'right' ? width : indent;
         lines.push({
           text: ln, x: x, y: baseline, size: p.size, bold: !!p.bold, italic: !!p.italic,
-          color: p.color, anchor: align === 'center' ? 'middle' : align === 'right' ? 'end' : 'start'
+          color: p.color, anchor: align === 'center' ? 'middle' : align === 'right' ? 'end' : 'start',
+          family: p.stack && p.stack !== stack ? p.stack : null // a heading font, drawn with its own font-family
         });
         y += lh;
       });

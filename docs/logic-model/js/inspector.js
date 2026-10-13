@@ -79,7 +79,7 @@
       nb.addEventListener('click', function () { onPick('none'); });
       wrapEl.appendChild(nb);
     }
-    TH.swatches(S.doc.diagram.theme).forEach(function (sw) {
+    TH.swatches(S.doc.diagram).forEach(function (sw) {
       var c = sw.value;
       // Spoken as "Fill: Teal (program)"; the hex code shows on hover.
       var b = h('button', { type: 'button', class: 'sw', dataset: { key: key + ':' + c }, style: { background: c }, attrs: { 'aria-pressed': String(value && String(value).toLowerCase() === c.toLowerCase()), title: sw.name + ', ' + c, 'aria-label': label + ': ' + sw.name } });
@@ -164,6 +164,53 @@
     topdown: '<svg viewBox="0 0 54 40" class="tpl-thumb"><g transform="translate(14 0)"><rect x="0" y="2" width="26" height="4" rx="1" fill="#e9eef0"/><g fill="#fff" stroke="#176b87" stroke-width=".8"><rect x="0" y="8" width="26" height="5" rx="1"/><rect x="0" y="15" width="26" height="5" rx="1"/></g><g fill="#fff8e8" stroke="#e5ad3d" stroke-width=".8"><rect x="0" y="22" width="26" height="5" rx="1"/><rect x="0" y="29" width="26" height="5" rx="1"/></g><rect x="0" y="35.5" width="26" height="3" rx="1" fill="#102a43"/></g></svg>'
   };
 
+  /**
+   * Font menu, grouped (Sans serif / Serif / Display). Fonts this computer
+   * doesn't have are marked; they show in the next font of their stack.
+   *   first  label of an extra first option with value 'same' (or null)
+   */
+  function fontSelect(key, value, first) {
+    var sel = h('select', { id: fid(key), dataset: { key: key } });
+    if (first) sel.appendChild(h('option', { value: 'same', selected: value === 'same' }, first));
+    var groups = {};
+    Object.keys(T.FONTS).forEach(function (k) {
+      var f = T.FONTS[k];
+      if (!groups[f.group]) { groups[f.group] = h('optgroup', { attrs: { label: f.group } }); sel.appendChild(groups[f.group]); }
+      groups[f.group].appendChild(h('option', { value: k, selected: value === k }, f.label + (T.installed(k) ? '' : ' – not installed')));
+    });
+    return sel;
+  }
+
+  /** The Custom theme's six colors, plus "Start from" to copy a preset's. */
+  function customColors(dg) {
+    var cur = TH.cleanCustom(dg.custom);
+    var grid = h('div', { class: 'cc-grid', attrs: { role: 'group', 'aria-label': 'Custom colors' } });
+    TH.CUSTOM_KEYS.forEach(function (ck) {
+      var k = ck[0];
+      var inp = h('input', { type: 'color', dataset: { key: 'custom:' + k }, attrs: { title: TH.colorName(cur[k]) + ', ' + cur[k] } });
+      inp.value = cur[k];
+      inp.addEventListener('input', function () {
+        S.mutate('Change custom color', function (d) {
+          d.diagram.custom = TH.cleanCustom(d.diagram.custom);
+          if (d.diagram.custom[k] === inp.value) return false;
+          d.diagram.custom[k] = inp.value;
+        }, { source: 'inspector', coalesce: 'custom:' + k });
+      });
+      inp.addEventListener('change', function () { LMB.history.seal(); queue(); });
+      grid.appendChild(h('label', { class: 'cc' }, inp, h('span', null, ck[1])));
+    });
+    var from = h('select', { id: fid('customfrom'), dataset: { key: 'customfrom' } });
+    from.appendChild(h('option', { value: '', selected: true }, 'Copy colors from…'));
+    TH.ids().forEach(function (id) { if (id !== 'custom') from.appendChild(h('option', { value: id }, TH.get(id).name)); });
+    from.addEventListener('change', function () {
+      var id = from.value;
+      if (!id) return;
+      S.mutate('Copy theme colors', function (d) { d.diagram.custom = TH.keyColors(id); }, { source: 'inspector' });
+      render();
+    });
+    return h('div', { class: 'cc-wrap' }, grid, row('Start from', from, from.id));
+  }
+
   /* ---------- Diagram panel (nothing selected) ---------- */
   function diagramPanel() {
     var dg = S.doc.diagram;
@@ -182,19 +229,28 @@
 
     var thl = h('div', { class: 'theme-list', attrs: { role: 'group', 'aria-label': 'Color theme' } });
     TH.ids().forEach(function (id) {
-      var th = TH.get(id);
-      var chips = TH.PROGRAM.concat(TH.OUTCOME).map(function (k) { return '<span style="background:' + TH.tokens(id, k).accent + '"></span>'; }).join('') + '<span style="background:' + th.context.fill + '"></span>';
-      var b = h('button', { type: 'button', class: 'theme-opt', dataset: { key: 'theme:' + id }, attrs: { 'aria-pressed': String(dg.theme === id) }, html: '<span class="theme-chips" aria-hidden="true">' + chips + '</span><span>' + U.escHTML(th.name) + '</span>' });
+      var which = id === 'custom' ? { theme: 'custom', custom: dg.custom } : id;
+      var th = TH.get(which);
+      var chips = TH.PROGRAM.concat(TH.OUTCOME).map(function (k) { return '<span style="background:' + TH.tokens(which, k).accent + '"></span>'; }).join('') + '<span style="background:' + th.context.fill + '"></span>';
+      var b = h('button', { type: 'button', class: 'theme-opt', dataset: { key: 'theme:' + id }, attrs: { 'aria-pressed': String(dg.theme === id) }, html: '<span class="theme-chips" aria-hidden="true">' + chips + '</span><span>' + U.escHTML(id === 'custom' ? 'Custom (your colors)' : th.name) + '</span>' });
       b.addEventListener('click', function () {
-        S.mutate('Change theme', function (d) { if (d.diagram.theme === id) return false; d.diagram.theme = id; }, { source: 'inspector' });
+        S.mutate('Change theme', function (d) {
+          if (d.diagram.theme === id) return false;
+          // The first time, Custom starts from the theme in use, so it's a tweak, not a blank slate.
+          if (id === 'custom' && !d.diagram.custom) d.diagram.custom = TH.keyColors(d.diagram.theme);
+          d.diagram.theme = id;
+        }, { source: 'inspector' });
       });
       thl.appendChild(b);
     });
-    out.push(sec('Color theme', [thl]));
+    var themeKids = [thl];
+    if (dg.theme === 'custom') themeKids.push(customColors(dg));
+    out.push(sec('Color theme', themeKids));
 
-    var fontSel = h('select', { id: fid('font'), dataset: { key: 'font' } });
-    Object.keys(T.FONTS).forEach(function (k) { fontSel.appendChild(h('option', { value: k, selected: dg.fontFamily === k }, T.FONTS[k].label)); });
+    var fontSel = fontSelect('font', dg.fontFamily, null);
     fontSel.addEventListener('change', function () { S.mutate('Change font', function (d) { d.diagram.fontFamily = fontSel.value; }, { source: 'inspector' }); });
+    var headSel = fontSelect('headfont', dg.headingFont || 'same', 'Same as main font');
+    headSel.addEventListener('change', function () { S.mutate('Change heading font', function (d) { d.diagram.headingFont = headSel.value; }, { source: 'inspector' }); });
     var size = numInput('Text size', dg.baseFontSize, function (v) { S.mutate('Change text size', function (d) { d.diagram.baseFontSize = v; }, { source: 'inspector', coalesce: 'basesize' }); }, { min: 7, max: 24, step: 0.5, key: 'basesize' });
     var pageSel = h('select', { id: fid('page'), dataset: { key: 'page' } });
     Object.keys(M.PAGES).forEach(function (k) { pageSel.appendChild(h('option', { value: k, selected: dg.page === k }, M.PAGES[k].label)); });
@@ -204,6 +260,7 @@
     });
     out.push(sec('Text and page', [
       row('Font', fontSel, fontSel.id),
+      row('Headings', headSel, headSel.id),
       row('Text size', h('div', { class: 'num-unit' }, size.el, h('span', { class: 'unit', attrs: { 'aria-hidden': 'true' } }, 'px')), size.id),
       row('Page', pageSel, pageSel.id),
       fitNote(),

@@ -300,6 +300,7 @@
     return lines.map(function (ln) {
       if (!ln.text) return '';
       return '<text x="' + n(ox + ln.x) + '" y="' + n(oy + ln.y) + '" font-size="' + n(ln.size) + '"' +
+        (ln.family ? ' font-family="' + esc(ln.family) + '"' : '') +
         (ln.bold ? ' font-weight="700"' : '') + (ln.italic ? ' font-style="italic"' : '') +
         ' fill="' + esc(ln.color) + '"' + (ln.anchor !== 'start' ? ' text-anchor="' + ln.anchor + '"' : '') + '>' + esc(ln.text) + '</text>';
     }).join('');
@@ -419,7 +420,7 @@
   R.background = function (doc, override) {
     var bg = override || doc.diagram.background;
     if (bg === 'transparent') return null;
-    if (bg === 'paper') return TH.get(doc.diagram.theme).paper;
+    if (bg === 'paper') return TH.get(doc.diagram).paper;
     return '#ffffff';
   };
 

@@ -11,6 +11,9 @@
      sections (optional)  per-column colors (overrides program/outcome)
      problem, context, assumptions, free, note   the other boxes
 
+   The Custom theme (id 'custom') is built from six colors a student picks;
+   see buildCustom below.
+
    Text colors are checked automatically: header text is darkened until it
    meets WCAG AA (4.5:1) against its box, and text on solid chips picks white
    or ink, whichever reads better (see tokens() at the bottom).
@@ -79,6 +82,53 @@
       free: { fill: '#ffffff', stroke: '#1f2a36' },
       note: { fill: '#fff4d6', stroke: '#d9b45a' }
     },
+    boise: {
+      name: 'Boise State',
+      // Official Boise State colors (boisestate.edu/brand): Blue #0033A0 (PMS 286),
+      // Orange #D64309 (PMS 172), accent navy #001F60, lightest gray #F6F7F9.
+      ink: '#001f60', muted: '#4d5b7c', paper: '#f6f7f9', arrow: '#001f60', bracket: '#d64309',
+      program: { accent: '#0033a0', wash: '#ffffff', tint: '#ebf0f9', line: '#b3c2e3' },
+      outcome: { accent: '#d64309', wash: '#fdf1ec', tint: '#ffffff', line: '#f0b9a3' },
+      problem: { fill: '#f6f7f9', stroke: '#0033a0', label: '#0033a0' },
+      context: { fill: '#001f60', text: '#ffffff', label: '#ffb38f' },
+      assumptions: { fill: '#f6f7f9', stroke: '#4d5b7c', label: '#001f60' },
+      free: { fill: '#ffffff', stroke: '#001f60' },
+      note: { fill: '#fdf1ec', stroke: '#e58a64' }
+    },
+    boiseBlue: {
+      name: 'Boise State blue',
+      // Blue throughout, with Boise State orange kept to small accents (brackets).
+      ink: '#001f60', muted: '#4d5b7c', paper: '#f6f7f9', arrow: '#0033a0', bracket: '#d64309',
+      program: { accent: '#0033a0', wash: '#ffffff', tint: '#ffffff', line: '#b3c2e3' },
+      outcome: { accent: '#001f60', wash: '#eef1f8', tint: '#ffffff', line: '#a7b2cc' },
+      problem: { fill: '#ebf0f9', stroke: '#0033a0', label: '#0033a0' },
+      context: { fill: '#f6f7f9', text: '#001f60', label: '#d64309' },
+      assumptions: { fill: '#ffffff', stroke: '#0033a0', label: '#001f60' },
+      free: { fill: '#ffffff', stroke: '#001f60' },
+      note: { fill: '#fdf1ec', stroke: '#e58a64' }
+    },
+    forest: {
+      name: 'Forest',
+      ink: '#1e2b22', muted: '#56645a', paper: '#f5f3ec', arrow: '#2d3b30', bracket: '#9c4a2f',
+      program: { accent: '#2f6b4f', wash: '#ffffff', tint: '#ecf3ee', line: '#b7d0c1' },
+      outcome: { accent: '#8a6d2b', wash: '#f8f3e6', tint: '#ffffff', line: '#dccb9e' },
+      problem: { fill: '#e9efe9', stroke: '#56645a', label: '#2f6b4f' },
+      context: { fill: '#24382c', text: '#f5f3ec', label: '#e2c77a' },
+      assumptions: { fill: '#f5f3ec', stroke: '#56645a', label: '#1e2b22' },
+      free: { fill: '#ffffff', stroke: '#1e2b22' },
+      note: { fill: '#f8f0d8', stroke: '#c9ad62' }
+    },
+    plum: {
+      name: 'Plum',
+      ink: '#2a1f33', muted: '#62566e', paper: '#f7f4f6', arrow: '#2a1f33', bracket: '#b0476a',
+      program: { accent: '#5b3c88', wash: '#ffffff', tint: '#f1edf7', line: '#cbbde0' },
+      outcome: { accent: '#2f7d7a', wash: '#ecf6f5', tint: '#ffffff', line: '#a8d2cf' },
+      problem: { fill: '#f1edf7', stroke: '#62566e', label: '#5b3c88' },
+      context: { fill: '#2a1f33', text: '#ffffff', label: '#f0b6c9' },
+      assumptions: { fill: '#f7f4f6', stroke: '#62566e', label: '#2a1f33' },
+      free: { fill: '#ffffff', stroke: '#2a1f33' },
+      note: { fill: '#fbeef2', stroke: '#d99ab0' }
+    },
     contrast: {
       name: 'Bold / high contrast',
       ink: '#000000', muted: '#2b2b2b', paper: '#ffffff', arrow: '#000000', bracket: '#b3001b',
@@ -92,6 +142,87 @@
       note: { fill: '#fff3b0', stroke: '#000000' }
     }
   };
+
+  /* ---------------------------------------------------------------------------
+     CUSTOM THEME. A student picks six colors (CUSTOM_KEYS); everything else
+     (box fills, borders, washes) is mixed from them. They live in the project
+     as doc.diagram.custom, so they save, undo and travel with the .json file.
+     ------------------------------------------------------------------------ */
+  var CUSTOM_KEYS = [
+    ['program', 'Program'], ['outcome', 'Outcomes'], ['ink', 'Text and arrows'],
+    ['bracket', 'Brackets'], ['context', 'Influences box'], ['paper', 'Page paper']
+  ];
+  /** The six key colors of a preset theme: where a custom theme starts. */
+  function keyColors(id) {
+    var th = THEMES[id] || THEMES.sps506;
+    return { program: th.program.accent, outcome: th.outcome.accent, ink: th.ink, bracket: th.bracket, context: th.context.fill, paper: th.paper };
+  }
+  var DEFAULT_CUSTOM = keyColors('sps506');
+  /** A clean set of custom colors (bad or missing values fall back to the defaults). */
+  function cleanCustom(c) {
+    var out = {};
+    CUSTOM_KEYS.forEach(function (k) {
+      var v = c && U.parseColor(c[k[0]]);
+      out[k[0]] = v ? U.toHex(v) : DEFAULT_CUSTOM[k[0]];
+    });
+    return out;
+  }
+  /** Lighten a page color until `fg` reads on it (AA) and it is light enough to be a page. */
+  function lightenFor(bg, fg) {
+    for (var t = 0; t <= 1.001; t += 0.05) {
+      var c = U.mix(bg, '#ffffff', t);
+      if (U.contrast(fg, c) >= 4.5 && U.luminance(c) >= 0.8) return c;
+    }
+    return '#ffffff';
+  }
+  /** A solid box color and the text on it: white or ink, and the box darkened if neither reads. */
+  function solidWithText(fill, ink) {
+    if (U.contrast('#ffffff', fill) >= 4.5) return { fill: fill, text: '#ffffff' };
+    if (U.contrast(ink, fill) >= 4.5) return { fill: fill, text: ink };
+    for (var t = 0.05; t <= 1.001; t += 0.05) {
+      var c = U.mix(fill, '#000000', t);
+      if (U.contrast('#ffffff', c) >= 4.5) return { fill: c, text: '#ffffff' };
+    }
+    return { fill: '#000000', text: '#ffffff' };
+  }
+  function buildCustom(raw) {
+    var c = cleanCustom(raw);
+    var W = '#ffffff';
+    var progTint = U.mix(c.program, W, 0.92), outWash = U.mix(c.outcome, W, 0.9);
+    // Body text sits on white, tints and washes: keep it dark enough for AA.
+    var ink = U.ensureContrast(c.ink, [W, progTint, outWash], 4.5);
+    var paper = lightenFor(c.paper, ink);
+    var muted = U.ensureContrast(U.mix(ink, W, 0.35), [W, paper], 4.5);
+    var ctx = solidWithText(c.context, ink);
+    return {
+      name: 'Custom',
+      ink: ink, muted: muted, paper: paper, arrow: ink, bracket: c.bracket,
+      program: { accent: c.program, wash: W, tint: progTint, line: U.mix(c.program, W, 0.65) },
+      outcome: { accent: c.outcome, wash: outWash, tint: W, line: U.mix(c.outcome, W, 0.6) },
+      problem: { fill: U.mix(c.program, W, 0.88), stroke: U.mix(c.program, ink, 0.3), label: c.program },
+      context: { fill: ctx.fill, text: ctx.text, label: c.outcome },
+      assumptions: { fill: U.mix(paper, W, 0.5), stroke: muted, label: ink },
+      free: { fill: W, stroke: ink },
+      note: { fill: U.mix(c.outcome, W, 0.85), stroke: U.mix(c.outcome, W, 0.45) }
+    };
+  }
+
+  /**
+   * Every lookup takes either a theme id or a diagram (doc.diagram). Pass the
+   * diagram wherever there is one: the Custom theme's colors live on it.
+   */
+  function resolve(x) {
+    if (x && typeof x === 'object') {
+      if (x.theme === 'custom') {
+        var c = cleanCustom(x.custom);
+        return { id: 'custom', key: 'custom:' + JSON.stringify(c), theme: buildCustom(c) };
+      }
+      x = x.theme;
+    }
+    if (x === 'custom') return { id: 'custom', key: 'custom:default', theme: buildCustom(null) };
+    var id = THEMES[x] ? x : 'sps506';
+    return { id: id, key: id, theme: THEMES[id] };
+  }
 
   var SECTION_WORD = { inputs: 'inputs', activities: 'activities', outputs: 'outputs', shortTerm: 'short-term', intermediate: 'intermediate', longTerm: 'long-term' };
 
@@ -122,14 +253,18 @@
   }
 
   var cache = {};
+  var cacheSize = 0;
   /**
    * Resolved colors for one theme (+ optional section): the place every
-   * diagram color is read from.
+   * diagram color is read from. `which` is a theme id or a diagram.
    */
-  function tokens(themeId, sectionKey) {
-    var key = themeId + '|' + (sectionKey || '');
+  function tokens(which, sectionKey) {
+    var r = resolve(which);
+    var key = r.key + '|' + (sectionKey || '');
     if (cache[key]) return cache[key];
-    var th = THEMES[themeId] || THEMES.sps506;
+    // Dragging a custom color makes a new theme on every step: don't keep them all.
+    if (++cacheSize > 400) { cache = {}; cacheSize = 1; }
+    var th = r.theme;
     var group = OUTCOME.indexOf(sectionKey) >= 0 ? th.outcome : th.program;
     var own = (th.sections && th.sections[sectionKey]) || {};
     var accent = own.accent || group.accent;
@@ -144,7 +279,8 @@
       tint: tint,
       line: line,
       // Text in the accent color (headers): darkened until AA on wash + tint + white.
-      text: U.ensureContrast(accent, [wash, tint, '#ffffff'], 4.5),
+      // (Also on the theme paper: structure labels sit on the page.)
+      text: U.ensureContrast(accent, [wash, tint, '#ffffff', th.paper], 4.5),
       chip: accent, // solid header chip (Columns template) …
       on: '#ffffff' // … and the text on it (fixed up below for AA)
     };
@@ -160,17 +296,22 @@
     THEMES: THEMES,
     PROGRAM: PROGRAM,
     OUTCOME: OUTCOME,
-    ids: function () { return Object.keys(THEMES); },
-    get: function (id) { return THEMES[id] || THEMES.sps506; },
+    CUSTOM_KEYS: CUSTOM_KEYS,
+    /** Every theme a diagram can use: the presets, then Custom. */
+    ids: function () { return Object.keys(THEMES).concat('custom'); },
+    valid: function (id) { return !!THEMES[id] || id === 'custom'; },
+    get: function (which) { return resolve(which).theme; },
     tokens: tokens,
+    keyColors: keyColors,
+    cleanCustom: cleanCustom,
     /**
      * Swatches offered in the color pickers for this theme, as
      * {value: '#176b87', name: 'Teal (program)'}. The name is what a screen
      * reader says for the swatch: a plain color word plus what the theme
      * uses that color for.
      */
-    swatches: function (id) {
-      var th = THEMES[id] || THEMES.sps506;
+    swatches: function (which) {
+      var th = resolve(which).theme;
       var list = [['#ffffff', ''], [th.paper, 'page'], [th.ink, 'text'], [th.muted, 'light text'],
         [th.program.accent, 'program'], [th.program.tint, 'program boxes'], [th.outcome.accent, 'outcomes'],
         [th.outcome.wash, 'outcome panels'], [th.bracket, 'brackets'], [th.problem.fill, 'problem box']];

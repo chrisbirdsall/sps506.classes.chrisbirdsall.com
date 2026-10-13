@@ -88,7 +88,7 @@
 
   function listSection(k) {
     var meta = M.SECTIONS[k];
-    var tok = TH.tokens(S.doc.diagram.theme, k);
+    var tok = TH.tokens(S.doc.diagram, k);
     var label = h('input', {
       // Named after the built-in section name, which never changes, so each one is told apart.
       class: 'ls-label', type: 'text', value: '', attrs: { 'aria-label': meta.label + ' section name (you can rename it)', spellcheck: 'false', autocomplete: 'off' }
@@ -405,7 +405,7 @@
       L.toggle.cb.checked = s.enabled !== false;
       L.wrap.classList.toggle('is-off', s.enabled === false);
     }
-    if (L.dot) L.dot.style.background = TH.tokens(S.doc.diagram.theme, k).accent;
+    if (L.dot) L.dot.style.background = TH.tokens(S.doc.diagram, k).accent;
   }
 
   /** Set an input's value without losing the caret when it has focus. */

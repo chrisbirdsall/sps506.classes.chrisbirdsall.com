@@ -268,7 +268,7 @@
     edgeStyle: function (edge, st, x) {
       if (!/^ae-ctx/.test(edge.id) && edge.id !== 'ae-problem') {
         var from = edge.from && edge.from.replace(/^pnl-/, '');
-        var tok = TH.tokens(x.doc.diagram.theme, from);
+        var tok = TH.tokens(x.doc.diagram, from);
         st.look = 'block';
         st.fill = U.mix(tok.accent, '#ffffff', 0.25);
         st.color = st.fill;
