@@ -910,6 +910,11 @@ margin-top: 1.4em; padding: 1em 1.2em; background: var(--pale-blue); border-left
 .cards.big > div:nth-child(2) > .num { color: var(--dark-gold); }
 .cards.big > div:nth-child(3) > .num { color: var(--coral); }
 .cards.big > div:nth-child(4) > .num { color: var(--muted); }
+.wheel-slide img.cre-wheel { display: block; height: 690px; width: auto; margin: 0 auto !important; }
+.wheel-slide .source-line { margin-top: 0.2em; }
+.tips.check > div { padding: 0.6em 0.75em; font-size: 0.92em; }
+.tips.check > div:nth-child(even) { border-left-color: var(--gold); background: var(--warm); }
+.tips.check b { margin-bottom: 0.2em; color: var(--blue); }
 </style>
   <style type="text/css">.reveal
 div.sourceCode
@@ -1549,42 +1554,22 @@ Evaluation
 <p>American Evaluation Association, <em>Public Statement on Cultural Competence in Evaluation</em> (2011)</p>
 </div>
 </section>
-<section id="the-cre-framework" class="slide level2 point-slide">
+<section id="the-cre-framework" class="slide level2 point-slide wheel-slide">
 <h2>The CRE Framework</h2>
-<div class="cycle">
-<div class="c-core">
-Cultural competence<small>runs through every stage</small>
+
+<img role="img" aria-label="Culturally responsive evaluation framework: nine stages in a cycle, from preparing for the evaluation to disseminating and using the results, with cultural competence at the center of every stage." data-src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iY3JlLXdoZWVsIiB2aWV3Qm94PSIwIDAgMTA0MCA3MjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZm9udC1mYW1pbHk9IkF2ZW5pciBOZXh0LCBIZWx2ZXRpY2EgTmV1ZSwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJDdWx0dXJhbGx5IHJlc3BvbnNpdmUgZXZhbHVhdGlvbiBmcmFtZXdvcms6IG5pbmUgc3RhZ2VzIGluIGEgY3ljbGUgYXJvdW5kIGN1bHR1cmFsIGNvbXBldGVuY2UiPgo8ZGVmcz48bWFya2VyIGlkPSJhaCIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI4IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+PHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIjMTAyYTQzIi8+PC9tYXJrZXI+CjxtYXJrZXIgaWQ9ImFocyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI4IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2IiBvcmllbnQ9ImF1dG8iPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgZmlsbD0iIzE3NmI4NyIvPjwvbWFya2VyPjwvZGVmcz4KPGVsbGlwc2UgY3g9IjUyMCIgY3k9IjM1OCIgcng9IjUxNiIgcnk9IjM1NCIgZmlsbD0iI2U4ZWVmMCIgb3BhY2l0eT0iMC41NSIvPgo8bGluZSB4MT0iNDYyLjYiIHkxPSIyNDUuOCIgeDI9IjQwOS42IiB5Mj0iMTQyLjUiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiIG1hcmtlci1lbmQ9InVybCgjYWhzKSIvPgo8bGluZSB4MT0iNTc3LjQiIHkxPSIyNDUuOCIgeDI9IjYzMC40IiB5Mj0iMTQyLjUiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiIG1hcmtlci1lbmQ9InVybCgjYWhzKSIvPgo8bGluZSB4MT0iNjM2LjYiIHkxPSIzMTAuMiIgeDI9Ijc0Ni4zIiB5Mj0iMjY1LjEiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiIG1hcmtlci1lbmQ9InVybCgjYWhzKSIvPgo8bGluZSB4MT0iNjQ1LjAiIHkxPSIzNzMuNyIgeDI9Ijc5NC44IiB5Mj0iMzkyLjQiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiIG1hcmtlci1lbmQ9InVybCgjYWhzKSIvPgo8bGluZSB4MT0iNjE2LjEiIHkxPSI0MzkuNCIgeDI9IjcxNS4wIiB5Mj0iNTIzLjIiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiIG1hcmtlci1lbmQ9InVybCgjYWhzKSIvPgo8bGluZSB4MT0iNTIwLjAiIHkxPSI0ODQuMCIgeDI9IjUyMC4wIiB5Mj0iNTkxLjAiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiIG1hcmtlci1lbmQ9InVybCgjYWhzKSIvPgo8bGluZSB4MT0iNDIzLjkiIHkxPSI0MzkuNCIgeDI9IjMyNS4wIiB5Mj0iNTIzLjIiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiIG1hcmtlci1lbmQ9InVybCgjYWhzKSIvPgo8bGluZSB4MT0iMzk1LjAiIHkxPSIzNzMuNyIgeDI9IjI0NS4yIiB5Mj0iMzkyLjQiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiIG1hcmtlci1lbmQ9InVybCgjYWhzKSIvPgo8bGluZSB4MT0iNDAzLjQiIHkxPSIzMTAuMiIgeDI9IjI5My43IiB5Mj0iMjY1LjEiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiIG1hcmtlci1lbmQ9InVybCgjYWhzKSIvPgo8bGluZSB4MT0iNDk5LjUiIHkxPSI4NS41IiB4Mj0iNTM2LjUiIHkyPSI4NS41IiBzdHJva2U9IiMxMDJhNDMiIHN0cm9rZS13aWR0aD0iMy41IiBtYXJrZXItZW5kPSJ1cmwoI2FoKSIvPgo8bGluZSB4MT0iNzQxLjciIHkxPSIxMzQuNSIgeDI9Ijc4NC41IiB5Mj0iMTYwLjAiIHN0cm9rZT0iIzEwMmE0MyIgc3Ryb2tlLXdpZHRoPSIzLjUiIG1hcmtlci1lbmQ9InVybCgjYWgpIi8+CjxsaW5lIHgxPSI4ODUuNSIgeTE9IjI2Mi4wIiB4Mj0iOTA4LjciIHkyPSIzNTUuNCIgc3Ryb2tlPSIjMTAyYTQzIiBzdHJva2Utd2lkdGg9IjMuNSIgbWFya2VyLWVuZD0idXJsKCNhaCkiLz4KPGxpbmUgeDE9Ijg4Mi4wIiB5MT0iNDU3LjQiIHgyPSI4MjUuMyIgeTI9IjUyNy4yIiBzdHJva2U9IiMxMDJhNDMiIHN0cm9rZS13aWR0aD0iMy41IiBtYXJrZXItZW5kPSJ1cmwoI2FoKSIvPgo8bGluZSB4MT0iNjYzLjMiIHkxPSI2MTAuOSIgeDI9IjY0My4wIiB5Mj0iNjE2LjIiIHN0cm9rZT0iIzEwMmE0MyIgc3Ryb2tlLXdpZHRoPSIzLjUiIG1hcmtlci1lbmQ9InVybCgjYWgpIi8+CjxsaW5lIHgxPSI0MDEuMCIgeTE9IjYxNy4yIiB4Mj0iMzgwLjciIHkyPSI2MTIuMCIgc3Ryb2tlPSIjMTAyYTQzIiBzdHJva2Utd2lkdGg9IjMuNSIgbWFya2VyLWVuZD0idXJsKCNhaCkiLz4KPGxpbmUgeDE9IjIxNy45IiB5MT0iNTMxLjIiIHgyPSIxNjEuMiIgeTI9IjQ2MS40IiBzdHJva2U9IiMxMDJhNDMiIHN0cm9rZS13aWR0aD0iMy41IiBtYXJrZXItZW5kPSJ1cmwoI2FoKSIvPgo8bGluZSB4MT0iMTMwLjQiIHkxPSIzNTkuNCIgeDI9IjE1My41IiB5Mj0iMjY2LjAiIHN0cm9rZT0iIzEwMmE0MyIgc3Ryb2tlLXdpZHRoPSIzLjUiIG1hcmtlci1lbmQ9InVybCgjYWgpIi8+CjxsaW5lIHgxPSIyNDguOCIgeTE9IjE2NC4wIiB4Mj0iMjkxLjYiIHkyPSIxMzguNSIgc3Ryb2tlPSIjMTAyYTQzIiBzdHJva2Utd2lkdGg9IjMuNSIgbWFya2VyLWVuZD0idXJsKCNhaCkiLz4KPGNpcmNsZSBjeD0iNTIwIiBjeT0iMzU4IiByPSIxMTgiIGZpbGw9IiMxMDJhNDMiLz4KPHRleHQgeD0iNTIwIiB5PSIzNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmN2Y0ZWQiIGZvbnQtc2l6ZT0iMzAiIGZvbnQtd2VpZ2h0PSI3MDAiPkN1bHR1cmFsPC90ZXh0Pgo8dGV4dCB4PSI1MjAiIHk9IjM4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2Y3ZjRlZCIgZm9udC1zaXplPSIzMCIgZm9udC13ZWlnaHQ9IjcwMCI+Y29tcGV0ZW5jZTwvdGV4dD4KPHJlY3QgeD0iMjY3LjUiIHk9IjQyLjUiIHdpZHRoPSIyMjYiIGhlaWdodD0iODYiIHJ4PSI0IiBmaWxsPSIjZmZmZGZhIiBzdHJva2U9IiMxNzZiODciIHN0cm9rZS13aWR0aD0iMi41Ii8+CjxyZWN0IHg9IjI2Ny41IiB5PSI0Mi41IiB3aWR0aD0iMjI2IiBoZWlnaHQ9IjYiIGZpbGw9IiMxNzZiODciLz4KPHRleHQgeD0iMjc5LjUiIHk9IjkzLjUiIGZpbGw9IiMxNzZiODciIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI4MDAiPjE8L3RleHQ+Cjx0ZXh0IHg9IjMwNi41IiB5PSI4MC41IiBmaWxsPSIjMTAyYTQzIiBmb250LXNpemU9IjE5LjUiIGZvbnQtd2VpZ2h0PSI2NTAiPlByZXBhcmUgZm9yPC90ZXh0Pgo8dGV4dCB4PSIzMDYuNSIgeT0iMTA2LjUiIGZpbGw9IiMxMDJhNDMiIGZvbnQtc2l6ZT0iMTkuNSIgZm9udC13ZWlnaHQ9IjY1MCI+dGhlIGV2YWx1YXRpb248L3RleHQ+CjxyZWN0IHg9IjU0Ni41IiB5PSI0Mi41IiB3aWR0aD0iMjI2IiBoZWlnaHQ9Ijg2IiByeD0iNCIgZmlsbD0iI2ZmZmRmYSIgc3Ryb2tlPSIjMTc2Yjg3IiBzdHJva2Utd2lkdGg9IjIuNSIvPgo8cmVjdCB4PSI1NDYuNSIgeT0iNDIuNSIgd2lkdGg9IjIyNiIgaGVpZ2h0PSI2IiBmaWxsPSIjMTc2Yjg3Ii8+Cjx0ZXh0IHg9IjU1OC41IiB5PSI5My41IiBmaWxsPSIjMTc2Yjg3IiBmb250LXNpemU9IjM0IiBmb250LXdlaWdodD0iODAwIj4yPC90ZXh0Pgo8dGV4dCB4PSI1ODUuNSIgeT0iODAuNSIgZmlsbD0iIzEwMmE0MyIgZm9udC1zaXplPSIxOS41IiBmb250LXdlaWdodD0iNjUwIj5FbmdhZ2U8L3RleHQ+Cjx0ZXh0IHg9IjU4NS41IiB5PSIxMDYuNSIgZmlsbD0iIzEwMmE0MyIgZm9udC1zaXplPSIxOS41IiBmb250LXdlaWdodD0iNjUwIj5zdGFrZWhvbGRlcnM8L3RleHQ+CjxyZWN0IHg9Ijc2MC4zIiB5PSIxNzAuMCIgd2lkdGg9IjIyNiIgaGVpZ2h0PSI4NiIgcng9IjQiIGZpbGw9IiNmZmZkZmEiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPHJlY3QgeD0iNzYwLjMiIHk9IjE3MC4wIiB3aWR0aD0iMjI2IiBoZWlnaHQ9IjYiIGZpbGw9IiMxNzZiODciLz4KPHRleHQgeD0iNzcyLjMiIHk9IjIyMS4wIiBmaWxsPSIjMTc2Yjg3IiBmb250LXNpemU9IjM0IiBmb250LXdlaWdodD0iODAwIj4zPC90ZXh0Pgo8dGV4dCB4PSI3OTkuMyIgeT0iMjA4LjAiIGZpbGw9IiMxMDJhNDMiIGZvbnQtc2l6ZT0iMTkuNSIgZm9udC13ZWlnaHQ9IjY1MCI+SWRlbnRpZnkgZXZhbHVhdGlvbjwvdGV4dD4KPHRleHQgeD0iNzk5LjMiIHk9IjIzNC4wIiBmaWxsPSIjMTAyYTQzIiBmb250LXNpemU9IjE5LjUiIGZvbnQtd2VpZ2h0PSI2NTAiPnB1cnBvc2Uocyk8L3RleHQ+CjxyZWN0IHg9IjgwOC44IiB5PSIzNjUuNCIgd2lkdGg9IjIyNiIgaGVpZ2h0PSI4NiIgcng9IjQiIGZpbGw9IiNmZmZkZmEiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPHJlY3QgeD0iODA4LjgiIHk9IjM2NS40IiB3aWR0aD0iMjI2IiBoZWlnaHQ9IjYiIGZpbGw9IiMxNzZiODciLz4KPHRleHQgeD0iODIwLjgiIHk9IjQxNi40IiBmaWxsPSIjMTc2Yjg3IiBmb250LXNpemU9IjM0IiBmb250LXdlaWdodD0iODAwIj40PC90ZXh0Pgo8dGV4dCB4PSI4NDcuOCIgeT0iNDAzLjQiIGZpbGw9IiMxMDJhNDMiIGZvbnQtc2l6ZT0iMTkuNSIgZm9udC13ZWlnaHQ9IjY1MCI+RnJhbWUgdGhlPC90ZXh0Pgo8dGV4dCB4PSI4NDcuOCIgeT0iNDI5LjQiIGZpbGw9IiMxMDJhNDMiIGZvbnQtc2l6ZT0iMTkuNSIgZm9udC13ZWlnaHQ9IjY1MCI+cmlnaHQgcXVlc3Rpb25zPC90ZXh0Pgo8cmVjdCB4PSI2NjkuMyIgeT0iNTM3LjIiIHdpZHRoPSIyMjYiIGhlaWdodD0iODYiIHJ4PSI0IiBmaWxsPSIjZmZmZGZhIiBzdHJva2U9IiMxNzZiODciIHN0cm9rZS13aWR0aD0iMi41Ii8+CjxyZWN0IHg9IjY2OS4zIiB5PSI1MzcuMiIgd2lkdGg9IjIyNiIgaGVpZ2h0PSI2IiBmaWxsPSIjMTc2Yjg3Ii8+Cjx0ZXh0IHg9IjY4MS4zIiB5PSI1ODguMiIgZmlsbD0iIzE3NmI4NyIgZm9udC1zaXplPSIzNCIgZm9udC13ZWlnaHQ9IjgwMCI+NTwvdGV4dD4KPHRleHQgeD0iNzA4LjMiIHk9IjU3NS4yIiBmaWxsPSIjMTAyYTQzIiBmb250LXNpemU9IjE5LjUiIGZvbnQtd2VpZ2h0PSI2NTAiPkRlc2lnbiB0aGU8L3RleHQ+Cjx0ZXh0IHg9IjcwOC4zIiB5PSI2MDEuMiIgZmlsbD0iIzEwMmE0MyIgZm9udC1zaXplPSIxOS41IiBmb250LXdlaWdodD0iNjUwIj5ldmFsdWF0aW9uPC90ZXh0Pgo8cmVjdCB4PSI0MDcuMCIgeT0iNjA1LjAiIHdpZHRoPSIyMjYiIGhlaWdodD0iODYiIHJ4PSI0IiBmaWxsPSIjZmZmZGZhIiBzdHJva2U9IiMxNzZiODciIHN0cm9rZS13aWR0aD0iMi41Ii8+CjxyZWN0IHg9IjQwNy4wIiB5PSI2MDUuMCIgd2lkdGg9IjIyNiIgaGVpZ2h0PSI2IiBmaWxsPSIjMTc2Yjg3Ii8+Cjx0ZXh0IHg9IjQxOS4wIiB5PSI2NTYuMCIgZmlsbD0iIzE3NmI4NyIgZm9udC1zaXplPSIzNCIgZm9udC13ZWlnaHQ9IjgwMCI+NjwvdGV4dD4KPHRleHQgeD0iNDQ2LjAiIHk9IjY0My4wIiBmaWxsPSIjMTAyYTQzIiBmb250LXNpemU9IjE5LjUiIGZvbnQtd2VpZ2h0PSI2NTAiPlNlbGVjdCBhbmQgYWRhcHQ8L3RleHQ+Cjx0ZXh0IHg9IjQ0Ni4wIiB5PSI2NjkuMCIgZmlsbD0iIzEwMmE0MyIgZm9udC1zaXplPSIxOS41IiBmb250LXdlaWdodD0iNjUwIj5pbnN0cnVtZW50YXRpb248L3RleHQ+CjxyZWN0IHg9IjE0NC43IiB5PSI1MzcuMiIgd2lkdGg9IjIyNiIgaGVpZ2h0PSI4NiIgcng9IjQiIGZpbGw9IiNmZmZkZmEiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPHJlY3QgeD0iMTQ0LjciIHk9IjUzNy4yIiB3aWR0aD0iMjI2IiBoZWlnaHQ9IjYiIGZpbGw9IiMxNzZiODciLz4KPHRleHQgeD0iMTU2LjciIHk9IjU4OC4yIiBmaWxsPSIjMTc2Yjg3IiBmb250LXNpemU9IjM0IiBmb250LXdlaWdodD0iODAwIj43PC90ZXh0Pgo8dGV4dCB4PSIxODMuNyIgeT0iNTc1LjIiIGZpbGw9IiMxMDJhNDMiIGZvbnQtc2l6ZT0iMTkuNSIgZm9udC13ZWlnaHQ9IjY1MCI+Q29sbGVjdDwvdGV4dD4KPHRleHQgeD0iMTgzLjciIHk9IjYwMS4yIiBmaWxsPSIjMTAyYTQzIiBmb250LXNpemU9IjE5LjUiIGZvbnQtd2VpZ2h0PSI2NTAiPnRoZSBkYXRhPC90ZXh0Pgo8cmVjdCB4PSI1LjIiIHk9IjM2NS40IiB3aWR0aD0iMjI2IiBoZWlnaHQ9Ijg2IiByeD0iNCIgZmlsbD0iI2ZmZmRmYSIgc3Ryb2tlPSIjMTc2Yjg3IiBzdHJva2Utd2lkdGg9IjIuNSIvPgo8cmVjdCB4PSI1LjIiIHk9IjM2NS40IiB3aWR0aD0iMjI2IiBoZWlnaHQ9IjYiIGZpbGw9IiMxNzZiODciLz4KPHRleHQgeD0iMTcuMiIgeT0iNDE2LjQiIGZpbGw9IiMxNzZiODciIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI4MDAiPjg8L3RleHQ+Cjx0ZXh0IHg9IjQ0LjIiIHk9IjQwMy40IiBmaWxsPSIjMTAyYTQzIiBmb250LXNpemU9IjE5LjUiIGZvbnQtd2VpZ2h0PSI2NTAiPkFuYWx5emU8L3RleHQ+Cjx0ZXh0IHg9IjQ0LjIiIHk9IjQyOS40IiBmaWxsPSIjMTAyYTQzIiBmb250LXNpemU9IjE5LjUiIGZvbnQtd2VpZ2h0PSI2NTAiPnRoZSBkYXRhPC90ZXh0Pgo8cmVjdCB4PSI1My43IiB5PSIxNzAuMCIgd2lkdGg9IjIyNiIgaGVpZ2h0PSI4NiIgcng9IjQiIGZpbGw9IiNmZmZkZmEiIHN0cm9rZT0iIzE3NmI4NyIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPHJlY3QgeD0iNTMuNyIgeT0iMTcwLjAiIHdpZHRoPSIyMjYiIGhlaWdodD0iNiIgZmlsbD0iIzE3NmI4NyIvPgo8dGV4dCB4PSI2NS43IiB5PSIyMjEuMCIgZmlsbD0iIzE3NmI4NyIgZm9udC1zaXplPSIzNCIgZm9udC13ZWlnaHQ9IjgwMCI+OTwvdGV4dD4KPHRleHQgeD0iOTIuNyIgeT0iMjA4LjAiIGZpbGw9IiMxMDJhNDMiIGZvbnQtc2l6ZT0iMTkuNSIgZm9udC13ZWlnaHQ9IjY1MCI+RGlzc2VtaW5hdGUgYW5kPC90ZXh0Pgo8dGV4dCB4PSI5Mi43IiB5PSIyMzQuMCIgZmlsbD0iIzEwMmE0MyIgZm9udC1zaXplPSIxOS41IiBmb250LXdlaWdodD0iNjUwIj51c2UgdGhlIHJlc3VsdHM8L3RleHQ+Cjwvc3ZnPg==" class="cre-wheel r-stretch" alt="Culturally responsive evaluation framework: nine stages in a cycle, from preparing for the evaluation to disseminating and using the results, with cultural competence at the center of every stage."><div class="source-line">
+<p>Redrawn from the Culturally Responsive Evaluation framework figure, ch. 12</p>
+</div>
+</section>
+<section id="discussion" class="slide level2 point-slide">
+<h2>Discussion</h2>
+<div class="qlist">
+<div>
+<span class="q-num">1</span>Why is culture an important consideration in evaluation?
 </div>
 <div>
-<span>1</span>Prepare for the evaluation
+<span class="q-num">2</span>Are there cases (policy contexts, target populations, jurisdictions) where it is more, or less, important than others?
 </div>
-<div>
-<span>2</span>Engage stakeholders
-</div>
-<div>
-<span>3</span>Identify evaluation purpose(s)
-</div>
-<div>
-<span>4</span>Frame the right questions
-</div>
-<div>
-<span>5</span>Design the evaluation
-</div>
-<div>
-<span>6</span>Select and adapt instrumentation
-</div>
-<div>
-<span>7</span>Collect the data
-</div>
-<div>
-<span>8</span>Analyze the data
-</div>
-<div>
-<span>9</span>Disseminate and use the results
-</div>
-</div>
-<div class="source-line">
-<p>Adapted from the Culturally Responsive Evaluation framework, ch. 12</p>
 </div>
 </section>
 <section id="cre-and-your-evaluation-plan" class="slide level2 point-slide">
@@ -1615,28 +1600,28 @@ Disseminate and use the results
 Evaluation plan and presentation<small>Dec 3 and 10; plan due Dec 17</small>
 </div>
 </div>
-<div class="prompt fragment">
-<p>Where in your plan does culture change a choice you have already made?</p>
-</div>
 </section>
-<section id="culturally-responsive-pedagogy" class="slide level2 point-slide">
-<h2>Culturally Responsive Pedagogy</h2>
-<div class="video-card">
-<p><b>Cultural Pedagogy: Educational Equality for Our Youth</b> <span>Isael Torres · TEDxSaltLakeCity</span> <a href="https://www.youtube.com/watch?v=AbmyxZaBnhI" target="_blank">Watch on YouTube</a></p>
+<section id="activity-culture-check" class="slide level2 point-slide">
+<h2>Activity: Culture Check</h2>
+<div class="task">
+<p>Swap design matrices with a partner. Ask one question at each stage below. Then each of you writes down one change to carry into your data collection plan.</p>
 </div>
-</section>
-<section id="discussion" class="slide level2 point-slide">
-<h2>Discussion</h2>
-<div class="qlist">
+<div class="tips two-up check">
 <div>
-<span class="q-num">1</span>Why is culture an important consideration in evaluation?
+<b>Engage stakeholders</b>Whose voices are missing? Who would participants trust to ask the questions?
 </div>
 <div>
-<span class="q-num">2</span>Are there cases (policy contexts, target populations, jurisdictions) where it is more, or less, important than others?
+<b>Frame the right questions</b>Whose definition of success do the questions use: the funder’s, the staff’s, or the participants’?
 </div>
 <div>
-<span class="q-num">3</span>In what ways is culture an important consideration for the program you are evaluating?
+<b>Select and adapt instrumentation</b>Would the measures work for every group the program serves? Think language, literacy, trust, and where and how you collect.
 </div>
+<div>
+<b>Disseminate and use the results</b>Who gets the findings, and in what form? Would participants recognize themselves in them?
+</div>
+</div>
+<div class="source-line">
+<p>Stages from the CRE framework, ch. 12 · 8 minutes each way, then report out</p>
 </div>
 </section>
 <section id="coming-up" class="slide level2 closing-slide" data-background-color="#102a43">
