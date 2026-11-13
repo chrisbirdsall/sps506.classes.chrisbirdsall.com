@@ -523,3 +523,12 @@
 
 .cards.four.qs > div > span { font-size: 0.88em; }
 .cards.three { --n: 3; }
+
+/* ---- evidence plan requirements (slide 2) ---- */
+
+.req-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.35em 0.6em; margin-top: 0.7em; }
+.req-list .req-head { grid-column: 1 / -1; color: var(--muted); font-size: 0.66em; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.req-list > div:not(.req-head) { padding: 0.35em 0.7em; background: #eef0f1; border-left: 6px solid var(--blue); font-size: 0.82em; line-height: 1.25; }
+.cards.tight { margin-top: 0.55em; }
+.cards.tight > div { padding: 0.5em 0.7em; }
+.cards.tight > div > span:not(.num) { font-size: 0.8em; }
