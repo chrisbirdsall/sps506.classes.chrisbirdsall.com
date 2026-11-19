@@ -984,6 +984,22 @@ padding: 0.55em 0 0.15em; border-bottom: 2px solid var(--line); font-size: 0.95e
 }
 .slots .s-line span { color: var(--blue); font-weight: 800; }
 .slots > div + div .s-line span { color: var(--dark-gold); }
+.group-challenges { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7em; margin-bottom: 0.45em; }
+.group-challenges > div { padding: 0.45em 0.75em 0.5em; background: var(--pale-blue); border-top: 8px solid var(--blue); }
+.group-challenges > div + div { background: #f8ebe7; border-top-color: var(--coral); }
+.group-challenges .col-head { margin-bottom: 0.15em; font-size: 0.85em; color: var(--blue); }
+.group-challenges > div + div .col-head { color: var(--coral); }
+.group-challenges .gc { display: grid; grid-template-columns: 1.2em 1fr; gap: 0.4em; font-size: 0.86em; font-weight: 700; line-height: 1.28; }
+.group-challenges .gc + .gc { margin-top: 0.2em; }
+.group-challenges .gc i { font-style: normal; color: var(--muted); font-weight: 800; }
+.steps.compact > div { padding: 0.26em 0.7em; font-size: 0.86em; }
+.slots.order { grid-template-columns: 0.8fr 1.2fr; align-items: start; }
+.slots.order .s-line { padding: 0.3em 0 0.15em; font-size: 0.9em; }
+.closing-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.closing-grid.four .closing-block:nth-child(4) { border-top-color: var(--muted); }
+.cards.order-cards > div { padding: 0.8em 0.9em; }
+.cards.order-cards > div > b { font-size: 1.3em; }
+.cards.order-cards > div > span:not(.num) { font-size: 0.95em; }
 </style>
   <style type="text/css">.reveal
 div.sourceCode
@@ -1493,7 +1509,7 @@ margin-right: 0; }
 <p>Wrap-up and<br>Course Overview</p>
 </div>
 <div class="opening-subtitle">
-<p>Handbook ch. 31 · Evaluation challenges · Presentation order · Plan check</p>
+<p>Handbook ch. 31 · Evaluation challenges · First presentation · Plan check</p>
 </div>
 </section>
 <section id="where-weve-been" class="slide level2 point-slide">
@@ -1554,9 +1570,13 @@ margin-right: 0; }
 <section id="activity-four-challenges" class="slide level2 point-slide">
 <h2>Activity: Four Challenges</h2>
 <div class="task">
-<p>In pairs, take one challenge. 15 minutes, then each pair reports.</p>
+<p>Two groups, two challenges each. 20 minutes, then each group reports.</p>
 </div>
-<div class="steps">
+<div class="group-challenges">
+<div><span class="col-head">Group 1</span><span class="gc"><i>1</i>Controlling the quality of the evaluation process</span><span class="gc"><i>2</i>Selecting and training evaluators</span></div>
+<div><span class="col-head">Group 2</span><span class="gc"><i>3</i>Maintaining standards and ethics</span><span class="gc"><i>4</i>Using evaluation findings to improve programs</span></div>
+</div>
+<div class="steps compact">
 <div>
 <span class="s-num">1</span>Why is it a challenge? What can go wrong?
 </div>
@@ -1620,7 +1640,7 @@ margin-right: 0; }
 <section id="your-evaluation-plan" class="slide level2 section-slide" data-background-color="#102a43">
 <h2>Your Evaluation Plan</h2>
 <div class="section-kicker">
-<p>December 3, 10, and 17</p>
+<p>Tonight, December 3, and December 17</p>
 </div>
 <div class="section-title">
 <p>Your Evaluation Plan</p>
@@ -1629,17 +1649,17 @@ margin-right: 0; }
 <p>Presentations, the final plan, and a plan check</p>
 </div>
 </section>
-<section id="presentations-december-3-and-10" class="slide level2 point-slide">
-<h2>Presentations: December 3 and 10</h2>
+<section id="presentations-tonight-and-december-3" class="slide level2 point-slide">
+<h2>Presentations: Tonight and December 3</h2>
 <div class="cards tight">
 <div>
 <span class="num">10 minutes</span><span>A PowerPoint overview of your evaluation plan</span>
 </div>
 <div>
-<span class="num">Once</span><span>You present on one of the two nights; we set the order tonight</span>
+<span class="num">December 3</span><span>Everyone who hasn’t presented, in one night, in the order on the next slide</span>
 </div>
 <div>
-<span class="num">December 17</span><span>The written plan is due after you present, by 11:59 pm</span>
+<span class="num">December 17</span><span>The written plan is due by 11:59 pm; no class that night</span>
 </div>
 </div>
 <div class="req-list">
@@ -1674,12 +1694,13 @@ Conclusion: recommendations, challenges, limitations
 </section>
 <section id="presentation-order" class="slide level2 point-slide">
 <h2>Presentation Order</h2>
-<div class="slots">
-<div><span class="col-head">December 3</span><div class="s-line"><span>1</span><i></i></div><div class="s-line"><span>2</span><i></i></div><div class="s-line"><span>3</span><i></i></div><div class="s-line"><span>4</span><i></i></div></div>
-<div><span class="col-head">December 10</span><div class="s-line"><span>1</span><i></i></div><div class="s-line"><span>2</span><i></i></div><div class="s-line"><span>3</span><i></i></div><div class="s-line"><span>4</span><i></i></div></div>
+<div class="cards two order-cards">
+<div>
+<span class="num">Tonight</span><b>First presentation</b><span>After the break</span>
 </div>
-<div class="prompt">
-<p>Who wants to go first?</p>
+<div>
+<span class="num">December 3</span><b>Everyone else, alphabetical by last name</b><span>The full order is posted in a Canvas announcement</span>
+</div>
 </div>
 </section>
 <section id="the-final-plan-what-youve-already-written" class="slide level2 point-slide">
@@ -1721,18 +1742,23 @@ Conclusion: recommendations, challenges, limitations
 </section>
 <section id="coming-up" class="slide level2 closing-slide" data-background-color="#102a43">
 <h2>Coming Up</h2>
-<div class="closing-grid">
+<div class="closing-grid four">
 <div class="closing-block">
 <p><strong>November 26</strong></p>
 <p>No class (Thanksgiving)</p>
 </div>
 <div class="closing-block">
-<p><strong>December 3 and 10</strong></p>
+<p><strong>December 3</strong></p>
 <p>Evaluation plan presentations</p>
-<p>10 minutes each, in the order set tonight</p>
+<p>Everyone who hasn’t presented yet</p>
+</div>
+<div class="closing-block">
+<p><strong>December 10</strong></p>
+<p>No class: project work week</p>
 </div>
 <div class="closing-block">
 <p><strong>December 17</strong></p>
+<p>No class</p>
 <p>Program evaluation plan due by 11:59 pm</p>
 </div>
 </div>

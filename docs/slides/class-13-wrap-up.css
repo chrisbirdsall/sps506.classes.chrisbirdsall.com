@@ -559,3 +559,21 @@
 }
 .slots .s-line span { color: var(--blue); font-weight: 800; }
 .slots > div + div .s-line span { color: var(--dark-gold); }
+
+.group-challenges { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7em; margin-bottom: 0.45em; }
+.group-challenges > div { padding: 0.45em 0.75em 0.5em; background: var(--pale-blue); border-top: 8px solid var(--blue); }
+.group-challenges > div + div { background: #f8ebe7; border-top-color: var(--coral); }
+.group-challenges .col-head { margin-bottom: 0.15em; font-size: 0.85em; color: var(--blue); }
+.group-challenges > div + div .col-head { color: var(--coral); }
+.group-challenges .gc { display: grid; grid-template-columns: 1.2em 1fr; gap: 0.4em; font-size: 0.86em; font-weight: 700; line-height: 1.28; }
+.group-challenges .gc + .gc { margin-top: 0.2em; }
+.group-challenges .gc i { font-style: normal; color: var(--muted); font-weight: 800; }
+.steps.compact > div { padding: 0.26em 0.7em; font-size: 0.86em; }
+
+.slots.order { grid-template-columns: 0.8fr 1.2fr; align-items: start; }
+.slots.order .s-line { padding: 0.3em 0 0.15em; font-size: 0.9em; }
+.closing-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.closing-grid.four .closing-block:nth-child(4) { border-top-color: var(--muted); }
+.cards.order-cards > div { padding: 0.8em 0.9em; }
+.cards.order-cards > div > b { font-size: 1.3em; }
+.cards.order-cards > div > span:not(.num) { font-size: 0.95em; }
