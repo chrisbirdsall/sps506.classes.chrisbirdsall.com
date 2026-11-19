@@ -577,3 +577,11 @@
 .cards.order-cards > div { padding: 0.8em 0.9em; }
 .cards.order-cards > div > b { font-size: 1.3em; }
 .cards.order-cards > div > span:not(.num) { font-size: 0.95em; }
+
+.cards.trends { gap: 0.5em; }
+.cards.trends > div { padding: 0.5em 0.7em 0.6em; background: var(--pale-blue); border-top-color: var(--blue); }
+.cards.trends > div:nth-child(3n+2) { border-top-color: var(--gold); background: var(--warm); }
+.cards.trends > div:nth-child(3n) { border-top-color: var(--coral); background: #f8ebe7; }
+.cards.trends > div > b { margin-bottom: 0.2em; font-size: 1em; }
+.cards.trends > div > span:not(.num) { font-size: 0.78em; line-height: 1.28; }
+.cards.trends + .prompt { margin-top: 0.6em; }
